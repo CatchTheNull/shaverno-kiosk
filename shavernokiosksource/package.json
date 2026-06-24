@@ -1,0 +1,19 @@
+{
+  "name": "shaverno-kiosk",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ШАВЕРНО — large-screen self-ordering kiosk (1080×1920)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "vue": "^3.4.27"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.11"
+  }
+}

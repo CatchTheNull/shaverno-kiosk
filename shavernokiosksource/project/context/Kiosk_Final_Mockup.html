@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200, initial-scale=1">
+<title>INNO Kiosk — Финальный макет всех экранов</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111;font-family:'Inter',system-ui,sans-serif;color:#fff;padding:30px;min-height:100vh}
+h1{text-align:center;font-family:'Montserrat',sans-serif;font-size:28px;margin-bottom:4px;font-weight:800;background:linear-gradient(135deg,#FF6B2C,#FF8F5C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{text-align:center;color:#666;font-size:13px;margin-bottom:30px}
+.row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.col{display:flex;flex-direction:column;align-items:center;gap:8px}
+.col .lbl{font-size:13px;color:#FF6B2C;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.col .desc{font-size:11px;color:#666;max-width:280px;text-align:center;line-height:1.4}
+
+/* Phone frame */
+.ph{width:270px;height:480px;background:#0d0d0d;border-radius:18px;overflow:hidden;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.6);border:2px solid #222;flex-shrink:0}
+
+/* Annotations */
+.note{background:rgba(255,107,44,.12);border:1px solid rgba(255,107,44,.25);border-radius:8px;padding:8px 12px;font-size:10px;color:#FF8F5C;line-height:1.4;max-width:280px;margin-top:6px}
+.note b{color:#FF6B2C}
+.note2{background:rgba(0,180,216,.1);border:1px solid rgba(0,180,216,.2);border-radius:8px;padding:8px 12px;font-size:10px;color:#48CAE4;line-height:1.4;max-width:280px;margin-top:6px}
+.note2 b{color:#00B4D8}
+
+/* Arrow between screens */
+.arrow{color:#FF6B2C;font-size:28px;display:flex;align-items:center;align-self:center;padding:0 4px}
+
+/* Common elements */
+.glass{background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.03) 50%,rgba(255,255,255,.06) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.accent-grad{background:linear-gradient(135deg,#FF6B2C,#FF8F5C)}
+.section-label{width:100%;text-align:center;font-size:16px;font-weight:700;color:#888;margin:20px 0 10px;font-family:'Montserrat',sans-serif;border-top:1px solid #222;padding-top:20px}
+</style>
+</head>
+<body>
+
+<h1>INNO Kiosk v3 — Финальный макет</h1>
+<p class="subtitle">Все экраны · Вертикальный барабан · Liquid glass · Анимации · Комбо-конструктор · Корзина с допродажами</p>
+
+<!-- ====== ROW 1: Welcome → Here/ToGo → Main ====== -->
+<div class="section-label">Основной флоу: Старт → Тип заказа → Меню</div>
+<div class="row">
+
+<!-- 1. WELCOME -->
+<div class="col">
+<div class="lbl">1. Welcome</div>
+<div class="ph">
+  <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(160deg,#0d0d0d,#1a1018,#0d0d0d)">
+    <div style="position:absolute;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,44,.18),transparent 70%);top:22%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div style="font-family:'Montserrat',sans-serif;font-size:52px;font-weight:900;background:linear-gradient(135deg,#FF6B2C,#FF8F5C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;z-index:2;letter-spacing:-2px">INNO</div>
+    <div style="color:#666;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin:4px 0 30px;z-index:2">Coffee & Kitchen</div>
+    <div style="color:#555;font-size:13px;z-index:2;animation:pulse 2s infinite">Нажмите, чтобы начать</div>
+    <div style="position:absolute;bottom:80px;font-size:24px;color:#FF6B2C;z-index:2;animation:bounce 1.5s infinite">↑</div>
+    <div style="display:flex;gap:6px;position:absolute;bottom:35px;z-index:2">
+      <div style="padding:7px 14px;border-radius:16px;background:#FF6B2C;color:#fff;font-size:11px;font-weight:600">RU</div>
+      <div style="padding:7px 14px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#888;font-size:11px;font-weight:600">EN</div>
+      <div style="padding:7px 14px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#888;font-size:11px;font-weight:600">中文</div>
+      <div style="padding:7px 14px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#888;font-size:11px;font-weight:600">DE</div>
+    </div>
+  </div>
+</div>
+<div class="note"><b>Анимация:</b> При тапе весь экран плавно уезжает вверх (slide-up 0.5s ease). Glow пульсирует. Стрелка bounce.</div>
+<div class="desc">Стартовый экран с выбором языка. Тап = slide up</div>
+</div>
+
+<div class="arrow">→</div>
+
+<!-- 2. HERE / TO GO -->
+<div class="col">
+<div class="lbl">2. Здесь / С собой</div>
+<div class="ph">
+  <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#0d0d0d">
+    <div style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:700">Как будете заказывать?</div>
+    <div style="display:flex;gap:12px">
+      <!-- Здесь -->
+      <div style="width:110px;height:130px;border-radius:18px;border:2px solid #FF6B2C;background:rgba(255,107,44,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 50%,rgba(255,255,255,.03));pointer-events:none;border-radius:16px"></div>
+        <div style="font-size:36px">🏠</div>
+        <div style="font-size:14px;font-weight:600;color:#fff">Здесь</div>
+      </div>
+      <!-- С собой -->
+      <div style="width:110px;height:130px;border-radius:18px;border:2px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+        <div style="font-size:36px">🛍</div>
+        <div style="font-size:14px;font-weight:600;color:#888">С собой</div>
+      </div>
+    </div>
+    <div style="color:#444;font-size:11px;margin-top:8px">Liquid glass на активном</div>
+  </div>
+</div>
+<div class="note"><b>Анимация:</b> Экран появляется снизу (slide-up). При выборе — карточка увеличивается (scale 1.05), glow, затем auto-переход в меню через 0.5s</div>
+</div>
+
+<div class="arrow">→</div>
+
+<!-- 3. MAIN MENU -->
+<div class="col">
+<div class="lbl">3. Главное меню</div>
+<div class="ph">
+  <div style="width:100%;height:100%;display:flex;flex-direction:column;background:#0d0d0d">
+    <!-- Topbar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;height:36px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.06)">
+      <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;background:linear-gradient(135deg,#FF6B2C,#FF8F5C);-webkit-background-clip:text;-webkit-text-fill-color:transparent">INNO</div>
+      <div style="display:flex;gap:2px;align-items:center">
+        <!-- Lang toggle small -->
+        <div style="padding:3px 7px;border-radius:6px;background:rgba(255,107,44,.1);font-size:9px;color:#FF8F5C;font-weight:600">RU</div>
+        <!-- Theme -->
+        <div style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:11px">🎨</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex:1;overflow:hidden">
+      <!-- VERTICAL DRUM (left) -->
+      <div style="width:70px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding:6px 4px;gap:3px;border-right:1px solid rgba(255,255,255,.04)">
+        <!-- Above (small, faded) -->
+        <div style="width:58px;height:54px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:scale(.78);opacity:.35">
+          <div style="font-size:16px">✨</div><div style="font-size:7px;color:#555">Сезонное</div>
+        </div>
+        <div style="width:58px;height:54px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:scale(.85);opacity:.5">
+          <div style="font-size:18px">🍵</div><div style="font-size:7px;color:#666">Чай</div>
+        </div>
+        <!-- ACTIVE — bigger, glowing, liquid glass -->
+        <div style="width:62px;height:64px;border-radius:12px;border:2px solid #FF6B2C;background:linear-gradient(135deg,rgba(255,107,44,.12),rgba(255,107,44,.04));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 0 20px rgba(255,107,44,.2);position:relative;z-index:3">
+          <div style="position:absolute;inset:0;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 50%,rgba(255,255,255,.04) 100%);pointer-events:none"></div>
+          <div style="font-size:22px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))">☕</div>
+          <div style="font-size:8px;color:#FF8F5C;font-weight:700">Кофе</div>
+        </div>
+        <div style="width:58px;height:54px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:scale(.85);opacity:.5">
+          <div style="font-size:18px">🧊</div><div style="font-size:7px;color:#666">Холодные</div>
+        </div>
+        <div style="width:58px;height:54px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:scale(.78);opacity:.35">
+          <div style="font-size:16px">🥐</div><div style="font-size:7px;color:#555">Еда</div>
+        </div>
+        <div style="width:58px;height:54px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:scale(.7);opacity:.25">
+          <div style="font-size:14px">🍰</div><div style="font-size:7px;color:#444">Десерты</div>
+        </div>
+        <div style="font-size:7px;color:#444;margin-top:2px">↕ свайп</div>
+      </div>
+
+      <!-- Products grid -->
+      <div style="flex:1;overflow-y:auto;padding:6px;scrollbar-width:none">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+          <!-- Cards -->
+          <div style="background:#1a1a1a;border-radius:10px;overflow:hidden;position:relative">
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#2a1510,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:28px">☕</div>
+            <div style="position:absolute;top:4px;left:4px;padding:2px 6px;border-radius:8px;background:#FF6B2C;font-size:7px;font-weight:700;color:#fff">ХИТ</div>
+            <div style="padding:5px 6px"><div style="font-size:9px;font-weight:600">Капучино</div><div style="font-size:7px;color:#555;margin:1px 0 4px">300 мл</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;font-weight:700">290₽</span><div style="width:20px;height:20px;border-radius:50%;background:#FF6B2C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 2px 6px rgba(255,107,44,.3)">+</div></div></div>
+          </div>
+          <div style="background:#1a1a1a;border-radius:10px;overflow:hidden">
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#1a2015,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:28px">☕</div>
+            <div style="padding:5px 6px"><div style="font-size:9px;font-weight:600">Латте</div><div style="font-size:7px;color:#555;margin:1px 0 4px">350 мл</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;font-weight:700">310₽</span><div style="width:20px;height:20px;border-radius:50%;background:#FF6B2C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px">+</div></div></div>
+          </div>
+          <div style="background:#1a1a1a;border-radius:10px;overflow:hidden;position:relative">
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#201520,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:28px">☕</div>
+            <div style="position:absolute;top:4px;left:4px;padding:2px 6px;border-radius:8px;background:#FF6B2C;font-size:7px;font-weight:700;color:#fff">ХИТ</div>
+            <div style="padding:5px 6px"><div style="font-size:9px;font-weight:600">Раф</div><div style="font-size:7px;color:#555;margin:1px 0 4px">350 мл</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;font-weight:700">340₽</span><div style="width:20px;height:20px;border-radius:50%;background:#FF6B2C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px">+</div></div></div>
+          </div>
+          <div style="background:#1a1a1a;border-radius:10px;overflow:hidden">
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#151a20,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:28px">☕</div>
+            <div style="padding:5px 6px"><div style="font-size:9px;font-weight:600">Американо</div><div style="font-size:7px;color:#555;margin:1px 0 4px">300 мл</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;font-weight:700">220₽</span><div style="width:20px;height:20px;border-radius:50%;background:#FF6B2C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px">+</div></div></div>
+          </div>
+          <div style="background:#1a1a1a;border-radius:10px;overflow:hidden;position:relative">
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#1a1a10,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:28px">☕</div>
+            <div style="position:absolute;top:4px;left:4px;padding:2px 6px;border-radius:8px;background:#4CAF50;font-size:7px;font-weight:700;color:#fff">NEW</div>
+            <div style="padding:5px 6px"><div style="font-size:9px;font-weight:600">Флэт Уайт</div><div style="font-size:7px;color:#555;margin:1px 0 4px">300 мл</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;font-weight:700">330₽</span><div style="width:20px;height:20px;border-radius:50%;background:#FF6B2C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px">+</div></div></div>
+          </div>
+          <div style="background:#1a1a1a;border-radius:10px;overflow:hidden">
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#1a1018,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:28px">☕</div>
+            <div style="padding:5px 6px"><div style="font-size:9px;font-weight:600">Мокко</div><div style="font-size:7px;color:#555;margin:1px 0 4px">350 мл</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;font-weight:700">360₽</span><div style="width:20px;height:20px;border-radius:50%;background:#FF6B2C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px">+</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM CART (from mockup B style) -->
+    <div style="background:#161616;border-top:1px solid rgba(255,255,255,.06);padding:6px 8px;flex-shrink:0;border-radius:14px 14px 0 0">
+      <div style="width:30px;height:3px;border-radius:2px;background:rgba(255,255,255,.12);margin:0 auto 6px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <span style="font-size:10px;font-weight:600;color:#aaa">🛒 3 поз.</span>
+        <span style="font-size:13px;font-weight:800;color:#FF6B2C;font-family:'Montserrat',sans-serif">920 ₽</span>
+      </div>
+      <div style="display:flex;gap:5px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none">
+        <div style="flex:0 0 70px;background:rgba(255,255,255,.04);border-radius:8px;padding:4px;text-align:center;position:relative;border:1px solid rgba(255,255,255,.06)">
+          <div style="position:absolute;top:-3px;right:-3px;background:#FF6B2C;color:#fff;font-size:7px;font-weight:700;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center">1</div>
+          <div style="font-size:16px">☕</div>
+          <div style="font-size:7px;color:#888">Капучино</div>
+          <div style="font-size:7px;color:#FF8F5C">+ваниль</div>
+        </div>
+        <div style="flex:0 0 70px;background:rgba(255,255,255,.04);border-radius:8px;padding:4px;text-align:center;border:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:16px">🥐</div>
+          <div style="font-size:7px;color:#888">Круассан</div>
+        </div>
+        <div style="flex:0 0 70px;background:rgba(255,255,255,.04);border-radius:8px;padding:4px;text-align:center;border:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:16px">🍰</div>
+          <div style="font-size:7px;color:#888">Тирамису</div>
+        </div>
+      </div>
+      <!-- Upsell -->
+      <div style="margin-top:4px;padding:4px 6px;background:rgba(255,107,44,.06);border:1px dashed rgba(255,107,44,.15);border-radius:6px;display:flex;align-items:center;gap:4px">
+        <span style="font-size:12px">🍪</span>
+        <span style="font-size:8px;color:#888;flex:1">+ <b style="color:#FF8F5C">Эклер</b> 230₽?</span>
+        <span style="padding:3px 6px;background:#FF6B2C;border-radius:6px;font-size:8px;color:#fff;font-weight:700">Да!</span>
+      </div>
+      <div style="width:100%;padding:8px;border-radius:10px;background:linear-gradient(135deg,#FF6B2C,#FF8F5C);color:#fff;font-size:12px;font-weight:700;margin-top:5px;text-align:center">Оформить · 920 ₽</div>
+    </div>
+
+    <!-- AI FAB -->
+    <div style="position:absolute;bottom:180px;right:8px;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF6B2C,#FF8F5C);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(255,107,44,.3);z-index:20">🤖</div>
+  </div>
+</div>
+<div class="note"><b>Барабан:</b> Вертикальный свайп ↕. Активная категория увеличена + liquid glass + glow. Соседние уменьшаются с blur. Крутится по кругу.<br><b>Корзина:</b> Трей снизу (drag handle ↕). Тап на элемент = popup для редактирования. Допродажи inline. Тап «Оформить» = полная корзина.<br><b>AI 🤖</b> в правом нижнем углу.</div>
+</div>
+
+</div>
+
+<!-- ====== ROW 2: Product Detail + Modifiers ====== -->
+<div class="section-label">Детализация товара с интерактивными модификаторами (как Drinkit)</div>
+<div class="row">
+
+<!-- 4. PRODUCT DETAIL -->
+<div class="col">
+<div class="lbl">4. Карточка товара</div>
+<div class="ph">
+  <div style="width:100%;height:100%;display:flex;flex-direction:column;background:#0d0d0d">
+    <!-- Hero -->
+    <div style="height:38%;background:linear-gradient(135deg,#2a1510,#0d0d0d);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0">
+      <div style="font-size:80px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.5))">☕</div>
+      <div style="position:absolute;inset:0;background:linear-gradient(transparent 50%,#0d0d0d 100%)"></div>
+      <div style="position:absolute;top:8px;left:8px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px">←</div>
+      <div style="position:absolute;top:8px;right:8px;padding:3px 8px;border-radius:10px;background:#FF6B2C;font-size:8px;font-weight:700;color:#fff">ХИТ</div>
+    </div>
+    <!-- Content -->
+    <div style="flex:1;padding:0 12px;overflow-y:auto;scrollbar-width:none">
+      <div style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;margin-bottom:4px">Капучино</div>
+      <div style="font-size:10px;color:#888;margin-bottom:10px">Классический с нежной молочной пенкой</div>
+      <!-- КБЖУ pills -->
+      <div style="display:flex;gap:4px;margin-bottom:12px">
+        <span style="padding:4px 8px;border-radius:14px;background:rgba(255,255,255,.06);font-size:9px;color:#888"><b style="color:#fff">120</b> ккал</span>
+        <span style="padding:4px 8px;border-radius:14px;background:rgba(255,255,255,.06);font-size:9px;color:#888"><b style="color:#fff">6</b>г Б</span>
+        <span style="padding:4px 8px;border-radius:14px;background:rgba(255,255,255,.06);font-size:9px;color:#888"><b style="color:#fff">5</b>г Ж</span>
+        <span style="padding:4px 8px;border-radius:14px;background:rgba(255,255,255,.06);font-size:9px;color:#888"><b style="color:#fff">12</b>г У</span>
+      </div>
+      <!-- Size selector -->
+      <div style="display:flex;gap:6px;margin-bottom:12px">
+        <div style="flex:1;padding:8px;border-radius:10px;border:2px solid #FF6B2C;background:rgba(255,107,44,.08);text-align:center;font-weight:600;font-size:13px;position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent);pointer-events:none;border-radius:8px"></div>
+          M<br><span style="font-size:8px;color:rgba(255,255,255,.5)">300 мл · 290₽</span>
+        </div>
+        <div style="flex:1;padding:8px;border-radius:10px;border:2px solid rgba(255,255,255,.08);text-align:center;font-weight:600;font-size:13px;color:#888">L<br><span style="font-size:8px;color:#555">400 мл · 350₽</span></div>
+      </div>
+
+      <!-- MODIFIERS — Drinkit style: horizontal swipeable cards -->
+      <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;text-align:center;margin-bottom:8px">Настрой, как ты любишь</div>
+
+      <!-- Обязательные -->
+      <div style="font-size:9px;color:#FF8F5C;font-weight:600;margin-bottom:4px">Молоко <span style="color:#FF6B2C">• обязательно</span></div>
+      <div style="display:flex;gap:5px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;margin-bottom:8px">
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:2px solid #FF6B2C;background:rgba(255,107,44,.08)">
+          <div style="font-size:16px;margin-bottom:2px">🥛</div>
+          <div style="font-size:7px;font-weight:600;color:#fff">Обычное</div>
+          <div style="font-size:7px;color:#555">+0₽</div>
+        </div>
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">🌾</div>
+          <div style="font-size:7px;font-weight:600;color:#888">Овсяное</div>
+          <div style="font-size:7px;color:#555">+80₽</div>
+        </div>
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">🥜</div>
+          <div style="font-size:7px;font-weight:600;color:#888">Миндаль</div>
+          <div style="font-size:7px;color:#555">+80₽</div>
+        </div>
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">🥥</div>
+          <div style="font-size:7px;font-weight:600;color:#888">Кокос</div>
+          <div style="font-size:7px;color:#555">+80₽</div>
+        </div>
+      </div>
+
+      <!-- Добавки (необязательные) -->
+      <div style="font-size:9px;color:#aaa;font-weight:600;margin-bottom:4px">Добавки</div>
+      <div style="display:flex;gap:5px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;margin-bottom:8px">
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:2px solid #FF6B2C;background:rgba(255,107,44,.08)">
+          <div style="font-size:16px;margin-bottom:2px">☕</div>
+          <div style="font-size:7px;font-weight:600;color:#fff">Экстра шот</div>
+          <div style="font-size:7px;color:#FF8F5C">+60₽</div>
+        </div>
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">🍶</div>
+          <div style="font-size:7px;font-weight:600;color:#888">Ваниль</div>
+          <div style="font-size:7px;color:#555">+50₽</div>
+        </div>
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">🍯</div>
+          <div style="font-size:7px;font-weight:600;color:#888">Карамель</div>
+          <div style="font-size:7px;color:#555">+50₽</div>
+        </div>
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">☁️</div>
+          <div style="font-size:7px;font-weight:600;color:#888">Маршмело</div>
+          <div style="font-size:7px;color:#555">+40₽</div>
+        </div>
+      </div>
+
+      <!-- Убрать -->
+      <div style="font-size:9px;color:#aaa;font-weight:600;margin-bottom:4px">Убрать</div>
+      <div style="display:flex;gap:5px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none">
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">🚫</div>
+          <div style="font-size:7px;color:#888">Без сахара</div>
+        </div>
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">💨</div>
+          <div style="font-size:7px;color:#888">Без пенки</div>
+        </div>
+        <div style="flex:0 0 58px;text-align:center;padding:6px 4px;border-radius:10px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)">
+          <div style="font-size:16px;margin-bottom:2px">💤</div>
+          <div style="font-size:7px;color:#888">Декаф</div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#161616;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0;height:50px">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border-radius:20px;padding:3px">
+        <div style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px">−</div>
+        <span style="font-size:16px;font-weight:700;min-width:20px;text-align:center">1</span>
+        <div style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px">+</div>
+      </div>
+      <div style="padding:10px 18px;border-radius:14px;background:linear-gradient(135deg,#FF6B2C,#FF8F5C);color:#fff;font-size:11px;font-weight:700;box-shadow:0 4px 12px rgba(255,107,44,.3)">В корзину · 350 ₽</div>
+    </div>
+  </div>
+</div>
+<div class="note"><b>Модификаторы:</b> Горизонтальные свайпабельные карточки (как Drinkit). Обязательные помечены оранжевой точкой. Каждая группа — отдельный ряд. Тап = toggle с анимацией scale+glow.<br><b>Анимация:</b> Карточка товара всплывает снизу (slide-up + scale). При добавлении — товар "летит" в корзину (animate icon to cart).</div>
+</div>
+
+<!-- 5. COMBO CONSTRUCTOR -->
+<div class="col">
+<div class="lbl">5. Комбо-конструктор</div>
+<div class="ph">
+  <div style="width:100%;height:100%;display:flex;flex-direction:column;background:#0d0d0d">
+    <div style="display:flex;align-items:center;padding:8px 10px;gap:6px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.06)">
+      <div style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:12px">←</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700">Собери комбо 🎁</div>
+      <div style="margin-left:auto;padding:3px 8px;border-radius:8px;background:rgba(255,107,44,.1);font-size:9px;color:#FF8F5C;font-weight:700">-200₽!</div>
+    </div>
+
+    <div style="flex:1;padding:8px 10px;overflow-y:auto;scrollbar-width:none">
+      <!-- STEP 1: Бургер (горизонтальный свайп) -->
+      <div style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:4px;margin-bottom:6px">
+          <div style="width:20px;height:20px;border-radius:50%;background:#FF6B2C;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">1</div>
+          <span style="font-size:10px;font-weight:600;color:#FF8F5C">Основное блюдо</span>
+          <span style="font-size:8px;color:#444;margin-left:auto">← свайп →</span>
+        </div>
+        <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none">
+          <div style="flex:0 0 90px;border-radius:12px;border:2px solid #FF6B2C;background:rgba(255,107,44,.08);padding:6px;text-align:center;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent);pointer-events:none;border-radius:10px"></div>
+            <div style="font-size:32px;margin-bottom:4px">🍔</div>
+            <div style="font-size:8px;font-weight:600">Чизбургер</div>
+            <div style="font-size:7px;color:#666">включён</div>
+            <div style="position:absolute;top:3px;right:3px;font-size:10px">✓</div>
+          </div>
+          <div style="flex:0 0 90px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:32px;margin-bottom:4px">🌯</div>
+            <div style="font-size:8px;font-weight:600;color:#888">Ролл</div>
+            <div style="font-size:7px;color:#555">+0₽</div>
+          </div>
+          <div style="flex:0 0 90px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:32px;margin-bottom:4px">🥙</div>
+            <div style="font-size:8px;font-weight:600;color:#888">Шаурма</div>
+            <div style="font-size:7px;color:#555">+30₽</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Гарнир (подсвечен — текущий шаг) -->
+      <div style="margin-bottom:12px;padding:8px;border-radius:12px;background:rgba(255,107,44,.04);border:1px solid rgba(255,107,44,.1)">
+        <div style="display:flex;align-items:center;gap:4px;margin-bottom:6px">
+          <div style="width:20px;height:20px;border-radius:50%;background:#FF6B2C;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px rgba(255,107,44,.3)">2</div>
+          <span style="font-size:10px;font-weight:600;color:#FF6B2C">Гарнир ← выберите</span>
+        </div>
+        <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none">
+          <div style="flex:0 0 80px;border-radius:12px;border:2px solid #FF6B2C;background:rgba(255,107,44,.08);padding:6px;text-align:center">
+            <div style="font-size:28px;margin-bottom:3px">🍟</div>
+            <div style="font-size:8px;font-weight:600">Фри</div>
+            <div style="font-size:7px;color:#666">+0₽</div>
+          </div>
+          <div style="flex:0 0 80px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:28px;margin-bottom:3px">🥗</div>
+            <div style="font-size:8px;font-weight:600;color:#888">Салат</div>
+            <div style="font-size:7px;color:#555">+90₽</div>
+          </div>
+          <div style="flex:0 0 80px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:28px;margin-bottom:3px">🧅</div>
+            <div style="font-size:8px;font-weight:600;color:#888">Кольца</div>
+            <div style="font-size:7px;color:#555">+60₽</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Напиток -->
+      <div style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:4px;margin-bottom:6px">
+          <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.1);color:#666;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">3</div>
+          <span style="font-size:10px;font-weight:600;color:#666">Напиток</span>
+        </div>
+        <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;opacity:.5">
+          <div style="flex:0 0 80px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:28px;margin-bottom:3px">🥤</div>
+            <div style="font-size:8px;font-weight:600;color:#888">Кола</div>
+          </div>
+          <div style="flex:0 0 80px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:28px;margin-bottom:3px">🧃</div>
+            <div style="font-size:8px;font-weight:600;color:#888">Сок</div>
+          </div>
+          <div style="flex:0 0 80px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:28px;margin-bottom:3px">☕</div>
+            <div style="font-size:8px;font-weight:600;color:#888">Кофе</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Соус -->
+      <div style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:4px;margin-bottom:6px">
+          <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.1);color:#666;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">4</div>
+          <span style="font-size:10px;font-weight:600;color:#666">Соус</span>
+        </div>
+        <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;opacity:.35">
+          <div style="flex:0 0 70px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:24px;margin-bottom:3px">🫙</div>
+            <div style="font-size:7px;color:#888">Кетчуп</div>
+          </div>
+          <div style="flex:0 0 70px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:24px;margin-bottom:3px">🧄</div>
+            <div style="font-size:7px;color:#888">Чесночный</div>
+          </div>
+          <div style="flex:0 0 70px;border-radius:12px;border:1.5px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);padding:6px;text-align:center">
+            <div style="font-size:24px;margin-bottom:3px">🌶</div>
+            <div style="font-size:7px;color:#888">Острый</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combo preview -->
+      <div style="padding:8px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.05)">
+        <div style="font-size:8px;color:#666;margin-bottom:5px;font-weight:600">Ваш комбо:</div>
+        <div style="display:flex;gap:4px;align-items:center;justify-content:center">
+          <div style="text-align:center"><div style="font-size:22px">🍔</div><div style="font-size:7px;color:#FF8F5C">✓</div></div>
+          <div style="color:#333;font-size:10px">+</div>
+          <div style="text-align:center"><div style="font-size:22px">🍟</div><div style="font-size:7px;color:#FF8F5C">✓</div></div>
+          <div style="color:#333;font-size:10px">+</div>
+          <div style="text-align:center"><div style="font-size:22px;opacity:.3">🥤</div><div style="font-size:7px;color:#444">?</div></div>
+          <div style="color:#333;font-size:10px">+</div>
+          <div style="text-align:center"><div style="font-size:22px;opacity:.3">🫙</div><div style="font-size:7px;color:#444">?</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div style="padding:8px 10px;background:#161616;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <span style="font-size:9px;color:#888">Комбо:</span>
+        <span style="font-size:14px;font-weight:800;color:#FF6B2C;font-family:'Montserrat',sans-serif">590₽ <span style="text-decoration:line-through;color:#555;font-size:10px">750₽</span></span>
+      </div>
+      <div style="width:100%;padding:10px;border-radius:12px;background:linear-gradient(135deg,#FF6B2C,#FF8F5C);color:#fff;font-size:12px;font-weight:700;text-align:center;box-shadow:0 4px 16px rgba(255,107,44,.3)">Добавить комбо в корзину 🎁</div>
+    </div>
+  </div>
+</div>
+<div class="note"><b>Комбо:</b> Все 4 шага видны на одном экране! Каждый ряд — горизонтальный свайп. Активный шаг подсвечен. Выбранное помечено ✓ и glow.<br><b>Анимация «Добавить»:</b> все 4 элемента (🍔🍟🥤🫙) собираются вместе, сжимаются и "падают" в корзину внизу.</div>
+</div>
+
+<!-- 6. FULL CART -->
+<div class="col">
+<div class="lbl">6. Полная корзина</div>
+<div class="ph">
+  <div style="width:100%;height:100%;display:flex;flex-direction:column;background:#0d0d0d">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0">
+      <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:14px">←</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700">Корзина</div>
+      <div style="font-size:10px;color:#666">Очистить</div>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:8px 12px;scrollbar-width:none">
+      <!-- Item 1 -->
+      <div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:center">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#2a1510,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">☕</div>
+        <div style="flex:1">
+          <div style="font-size:11px;font-weight:600">Капучино L</div>
+          <div style="font-size:8px;color:#FF8F5C;margin:1px 0">+экстра шот, овсяное</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:12px;font-weight:700">430 ₽</span>
+            <div style="display:flex;align-items:center;gap:5px">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:10px">−</span>
+              <span style="font-size:11px;font-weight:700">1</span>
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:10px">+</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:9px;color:#FF8F5C;cursor:pointer">✎</div>
+      </div>
+      <!-- Item 2 — Combo -->
+      <div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:center">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#201510,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;gap:1px;flex-wrap:wrap">🍔🍟<br>🥤🫙</div>
+        <div style="flex:1">
+          <div style="font-size:11px;font-weight:600">Комбо 🎁</div>
+          <div style="font-size:8px;color:#888;margin:1px 0">Чизбургер + Фри + Кола + Кетчуп</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><span style="font-size:12px;font-weight:700">590 ₽</span> <span style="font-size:9px;color:#555;text-decoration:line-through">750₽</span></div>
+            <div style="display:flex;align-items:center;gap:5px">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:10px">−</span>
+              <span style="font-size:11px;font-weight:700">1</span>
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:10px">+</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:9px;color:#FF8F5C">✎</div>
+      </div>
+      <!-- Item 3 -->
+      <div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:center">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#151a20,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🍰</div>
+        <div style="flex:1">
+          <div style="font-size:11px;font-weight:600">Тирамису</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+            <span style="font-size:12px;font-weight:700">350 ₽</span>
+            <div style="display:flex;align-items:center;gap:5px">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:10px">−</span>
+              <span style="font-size:11px;font-weight:700">1</span>
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:10px">+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPSELL SECTION -->
+      <div style="margin-top:12px;padding:10px;background:rgba(255,107,44,.05);border:1px solid rgba(255,107,44,.1);border-radius:12px">
+        <div style="font-size:11px;font-weight:700;color:#FF8F5C;margin-bottom:8px;text-align:center">Часто берут вместе 🤝</div>
+        <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none">
+          <div style="flex:0 0 70px;text-align:center;padding:6px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:20px;margin-bottom:2px">🍪</div>
+            <div style="font-size:7px;color:#888">Эклер</div>
+            <div style="font-size:8px;font-weight:700;color:#FF8F5C">+230₽</div>
+          </div>
+          <div style="flex:0 0 70px;text-align:center;padding:6px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:20px;margin-bottom:2px">🥐</div>
+            <div style="font-size:7px;color:#888">Круассан</div>
+            <div style="font-size:8px;font-weight:700;color:#FF8F5C">+180₽</div>
+          </div>
+          <div style="flex:0 0 70px;text-align:center;padding:6px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:20px;margin-bottom:2px">🧃</div>
+            <div style="font-size:7px;color:#888">Сок</div>
+            <div style="font-size:8px;font-weight:700;color:#FF8F5C">+200₽</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom -->
+    <div style="padding:8px 12px;background:#161616;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0">
+      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+        <span style="font-size:10px;color:#888">3 позиции</span>
+        <span style="font-size:18px;font-weight:800;color:#FF6B2C;font-family:'Montserrat',sans-serif">1 370 ₽</span>
+      </div>
+      <div style="width:100%;padding:12px;border-radius:14px;background:linear-gradient(135deg,#FF6B2C,#FF8F5C);color:#fff;font-size:14px;font-weight:700;text-align:center;box-shadow:0 4px 20px rgba(255,107,44,.3)">Оплатить · 1 370 ₽</div>
+    </div>
+  </div>
+</div>
+<div class="note"><b>Корзина:</b> Тап ✎ = вернуться к редактированию модификаторов. Свайп ← на элементе = удалить. Комбо показано как единый элемент. Допродажи — горизонтальный свайп внизу. Кнопка «Оплатить» = оплата.</div>
+</div>
+
+</div>
+
+<!-- ====== ROW 3: Animations description ====== -->
+<div class="section-label">Ключевые анимации и взаимодействия</div>
+<div class="row" style="max-width:900px;margin:0 auto 40px">
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%">
+  <div class="note2"><b>Welcome → Menu:</b> Весь экран slide-up (translateY 0 → -100%) за 0.5s ease-out. Новый экран появляется снизу.</div>
+  <div class="note2"><b>Барабан (drum):</b> Вертикальный свайп. CSS transform: scale + rotateX + blur + opacity. Активная карточка = scale(1) + 0 blur. Соседние = scale(.82) + blur(1px). Дальние = scale(.7) + blur(2px). Бесконечный цикл.</div>
+  <div class="note2"><b>Liquid glass:</b> На активных элементах — gradient overlay (rgba(255,255,255,.12) → transparent → rgba(255,255,255,.04)). Имитирует отражение света на стекле.</div>
+  <div class="note2"><b>Добавление в корзину:</b> Иконка товара анимируется от карточки → к иконке корзины (bezier path). Cart badge делает bounce. Корзина внизу обновляется с fade-in нового элемента.</div>
+  <div class="note2"><b>Открытие товара:</b> Карточка "вырастает" из своей позиции (scale 0.8 → 1, opacity 0 → 1, translateY 50px → 0). Закрытие — обратная анимация.</div>
+  <div class="note2"><b>Комбо сборка:</b> При нажатии «Добавить комбо» все 4 элемента собираются в центр (animate translateX/Y), merge в одну карточку, которая "падает" вниз в корзину с bounce.</div>
+  <div class="note2"><b>Модификаторы:</b> При тапе — scale(1.1) → scale(1) + glow pulse. Горизонтальный свайп с инерцией (touch-scroll с deceleration).</div>
+  <div class="note2"><b>Корзина-трей:</b> Drag handle для раскрытия/сворачивания (свайп ↕). Свернутая = мини-превью. Развёрнутая = полный список с допродажами.</div>
+</div>
+</div>
+
+<style>
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+</style>
+</body>
+</html>

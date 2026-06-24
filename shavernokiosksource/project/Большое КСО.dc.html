@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#202022;width:100%;height:100%}
+::-webkit-scrollbar{width:0;height:0}
+@keyframes ksoPulse{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes ksoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes ksoPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes ksoRise{0%{transform:translateY(60px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes ksoSpin{to{transform:rotate(360deg)}}
+@keyframes ksoGlow{0%,100%{box-shadow:0 0 0 0 var(--accentLine)}50%{box-shadow:0 0 40px 4px var(--accentLine)}}
+image-slot{display:block}
+</style>
+</helmet>
+
+<div style="{{ rootCss }};width:1080px;height:1920px;position:relative;overflow:hidden;font-family:'Inter',system-ui,sans-serif;color:var(--fg);background:var(--bg);user-select:none">
+
+  <!-- ===== SHIFTABLE CONTENT (accessibility lower) ===== -->
+  <div style="{{ shiftStyle }};position:absolute;inset:0">
+
+    <!-- ============ WELCOME / LANGUAGE ============ -->
+    <sc-if value="{{ isWelcome }}" hint-placeholder-val="{{ true }}">
+    <div onClick="{{ welcomeTap }}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;background:#0d0d0d;cursor:pointer">
+      <!-- Fullscreen video splash -->
+      <video ref="{{ videoRef }}" autoplay loop muted playsinline preload="auto" onEnded="{{ onVideoEnded }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0d0d0d;z-index:0"></video>
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,.08) 48%,rgba(0,0,0,.6) 78%,rgba(0,0,0,.88) 100%)"></div>
+
+      <div style="position:absolute;bottom:560px;left:0;right:0;text-align:center;font-family:'Montserrat';font-weight:700;font-size:48px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.8);z-index:3;animation:ksoPulse 2.6s infinite">{{ tr.chooseLang }} · Choose language</div>
+      <!-- Language glass spheres (horizontal scroll if many) -->
+      <div style="position:absolute;bottom:280px;left:0;right:0;display:flex;gap:30px;z-index:3;padding:24px 40px;overflow-x:auto;justify-content:center;scroll-snap-type:x proximity">
+
+        <div onClick="{{ chooseRu }}" style="display:flex;flex-direction:column;align-items:center;gap:20px;cursor:pointer;flex:0 0 auto;scroll-snap-align:center" style-active="transform:scale(.93)">
+          <div style="width:168px;height:168px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.45),rgba(255,255,255,.12) 46%,rgba(255,255,255,.04) 74%);border:2px solid rgba(255,255,255,.55);box-shadow:0 22px 50px rgba(0,0,0,.4),inset -12px -16px 34px rgba(0,0,0,.32),inset 12px 14px 30px rgba(255,255,255,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
+            <div style="width:116px;height:116px;border-radius:50%;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.4);position:relative"><div style="position:absolute;inset:0;display:flex;flex-direction:column"><div style="flex:1;background:#fff"></div><div style="flex:1;background:#0039A6"></div><div style="flex:1;background:#D52B1E"></div></div></div>
+            <div style="position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.95),rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 52%)"></div>
+          </div>
+          <div style="font-size:30px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.75)">Русский</div>
+        </div>
+
+        <div onClick="{{ chooseEn }}" style="display:flex;flex-direction:column;align-items:center;gap:20px;cursor:pointer;flex:0 0 auto;scroll-snap-align:center" style-active="transform:scale(.93)">
+          <div style="width:168px;height:168px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.45),rgba(255,255,255,.12) 46%,rgba(255,255,255,.04) 74%);border:2px solid rgba(255,255,255,.55);box-shadow:0 22px 50px rgba(0,0,0,.4),inset -12px -16px 34px rgba(0,0,0,.32),inset 12px 14px 30px rgba(255,255,255,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
+            <div style="width:116px;height:116px;border-radius:50%;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.4);position:relative;background:#012169">
+              <div style="position:absolute;top:50%;left:-25%;width:150%;height:13px;background:#fff;transform:rotate(33deg);transform-origin:center"></div>
+              <div style="position:absolute;top:50%;left:-25%;width:150%;height:13px;background:#fff;transform:rotate(-33deg);transform-origin:center"></div>
+              <div style="position:absolute;top:50%;left:-25%;width:150%;height:6px;background:#C8102E;transform:rotate(33deg);transform-origin:center"></div>
+              <div style="position:absolute;top:50%;left:-25%;width:150%;height:6px;background:#C8102E;transform:rotate(-33deg);transform-origin:center"></div>
+              <div style="position:absolute;top:0;bottom:0;left:50%;width:22px;margin-left:-11px;background:#fff"></div>
+              <div style="position:absolute;left:0;right:0;top:50%;height:22px;margin-top:-11px;background:#fff"></div>
+              <div style="position:absolute;top:0;bottom:0;left:50%;width:12px;margin-left:-6px;background:#C8102E"></div>
+              <div style="position:absolute;left:0;right:0;top:50%;height:12px;margin-top:-6px;background:#C8102E"></div>
+            </div>
+            <div style="position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.95),rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 52%)"></div>
+          </div>
+          <div style="font-size:30px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.75)">English</div>
+        </div>
+
+        <div onClick="{{ chooseZh }}" style="display:flex;flex-direction:column;align-items:center;gap:20px;cursor:pointer;flex:0 0 auto;scroll-snap-align:center" style-active="transform:scale(.93)">
+          <div style="width:168px;height:168px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.45),rgba(255,255,255,.12) 46%,rgba(255,255,255,.04) 74%);border:2px solid rgba(255,255,255,.55);box-shadow:0 22px 50px rgba(0,0,0,.4),inset -12px -16px 34px rgba(0,0,0,.32),inset 12px 14px 30px rgba(255,255,255,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
+            <div style="width:116px;height:116px;border-radius:50%;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.4);position:relative;background:#DE2910">
+              <span style="position:absolute;left:18px;top:24px;color:#FFDE00;font-size:32px;line-height:1">★</span>
+              <span style="position:absolute;left:52px;top:16px;color:#FFDE00;font-size:13px">★</span>
+              <span style="position:absolute;left:62px;top:34px;color:#FFDE00;font-size:13px">★</span>
+              <span style="position:absolute;left:52px;top:54px;color:#FFDE00;font-size:13px">★</span>
+            </div>
+            <div style="position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.95),rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 52%)"></div>
+          </div>
+          <div style="font-size:30px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.75)">中文</div>
+        </div>
+
+        <div onClick="{{ chooseDe }}" style="display:flex;flex-direction:column;align-items:center;gap:20px;cursor:pointer;flex:0 0 auto;scroll-snap-align:center" style-active="transform:scale(.93)">
+          <div style="width:168px;height:168px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.45),rgba(255,255,255,.12) 46%,rgba(255,255,255,.04) 74%);border:2px solid rgba(255,255,255,.55);box-shadow:0 22px 50px rgba(0,0,0,.4),inset -12px -16px 34px rgba(0,0,0,.32),inset 12px 14px 30px rgba(255,255,255,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
+            <div style="width:116px;height:116px;border-radius:50%;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.4);position:relative"><div style="position:absolute;inset:0;display:flex;flex-direction:column"><div style="flex:1;background:#000"></div><div style="flex:1;background:#DD0000"></div><div style="flex:1;background:#FFCE00"></div></div></div>
+            <div style="position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.95),rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 52%)"></div>
+          </div>
+          <div style="font-size:30px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.75)">Deutsch</div>
+        </div>
+
+        <div onClick="{{ chooseTr }}" style="display:flex;flex-direction:column;align-items:center;gap:20px;cursor:pointer;flex:0 0 auto;scroll-snap-align:center" style-active="transform:scale(.93)">
+          <div style="width:168px;height:168px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.45),rgba(255,255,255,.12) 46%,rgba(255,255,255,.04) 74%);border:2px solid rgba(255,255,255,.55);box-shadow:0 22px 50px rgba(0,0,0,.4),inset -12px -16px 34px rgba(0,0,0,.32),inset 12px 14px 30px rgba(255,255,255,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
+            <div style="width:116px;height:116px;border-radius:50%;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.4);position:relative;background:#E30A17;display:flex;align-items:center;justify-content:center"><span style="color:#fff;font-size:56px;line-height:1">☪</span></div>
+            <div style="position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.95),rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 52%)"></div>
+          </div>
+          <div style="font-size:30px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.75)">Türkçe</div>
+        </div>
+
+      </div>
+
+      <!-- Accessibility (bottom, icon only) -->
+      <div onClick="{{ toggleLower }}" title="{{ tr.disabledMode }}" style="position:absolute;bottom:90px;left:50%;transform:translateX(-50%);width:124px;height:124px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.45);color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:64px;z-index:3;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.35)" style-active="transform:translateX(-50%) scale(.94)">♿</div>
+    </div>
+    </sc-if>
+
+    <!-- ============ ORDER TYPE ============ -->
+    <sc-if value="{{ isType }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg)">
+      <div style="padding:90px 48px 0;text-align:center">
+        <div style="font-family:'Montserrat';font-weight:900;font-size:44px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">ШАВЕРНО</div>
+        <div style="font-family:'Montserrat';font-weight:800;font-size:60px;margin-top:120px;line-height:1.1">{{ tr.howReceive }}</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:row;gap:40px;padding:80px 48px;align-items:center;justify-content:center">
+        <div onClick="{{ pickHere }}" style="width:440px;height:480px;border-radius:34px;border:3px solid var(--accent);background:linear-gradient(160deg,var(--accentSoft),transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:60px 36px;cursor:pointer;box-shadow:0 0 60px var(--accentLine)" style-active="transform:scale(.98)">
+          <div style="font-size:150px;line-height:1">🍽️</div>
+          <div style="font-size:54px;font-weight:800;font-family:'Montserrat'">{{ tr.here }}</div>
+          <div style="font-size:28px;color:var(--muted);text-align:center">{{ tr.hereDesc }}</div>
+        </div>
+        <div onClick="{{ pickToGo }}" style="width:440px;height:480px;border-radius:34px;border:3px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:60px 36px;cursor:pointer" style-active="transform:scale(.98)">
+          <div style="font-size:150px;line-height:1">🛍️</div>
+          <div style="font-size:54px;font-weight:800;font-family:'Montserrat'">{{ tr.toGo }}</div>
+          <div style="font-size:28px;color:var(--muted);text-align:center">{{ tr.toGoDesc }}</div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ============ MENU ============ -->
+    <sc-if value="{{ isMenu }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg)">
+      <!-- Zone A: video banner header -->
+      <div style="height:230px;flex-shrink:0;position:relative;overflow:hidden">
+        <video ref="{{ bannerRef }}" autoplay loop muted playsinline preload="auto" onEnded="{{ onVideoEnded }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0d0d0d;z-index:0"></video>
+        <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.22) 45%,rgba(0,0,0,.55))"></div>
+        <div style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:0 48px">
+          <div style="font-family:'Montserrat';font-weight:900;font-size:58px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.7)">ШАВЕРНО</div>
+          <div style="font-family:'Montserrat';font-weight:700;font-size:46px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.7)">{{ activeCatLabel }}</div>
+        </div>
+        <div onClick="{{ openAuth }}" style="position:absolute;top:22px;right:40px;z-index:3;display:flex;align-items:center;gap:12px;padding:14px 26px;border-radius:50px;background:rgba(255,255,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:26px;font-weight:700;cursor:pointer" style-active="transform:scale(.96)">⭐ {{ loyaltyLabel }}</div>
+      </div>
+      <!-- Zone B: rail + grid -->
+      <div style="flex:1;display:flex;overflow:hidden">
+        <div style="width:248px;flex-shrink:0;overflow-y:auto;padding:32px 14px 40px;display:flex;flex-direction:column;gap:36px;align-items:center">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+            <div onClick="{{ c.onSelect }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;width:100%" style-active="transform:scale(.93)">
+              <image-slot id="{{ c.slotId }}" style="{{ c.imgStyle }}" shape="circle" placeholder="{{ c.label }}"></image-slot>
+              <div style="{{ c.labelStyle }}">{{ c.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:32px 48px 40px">
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px">
+            <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+              <div onClick="{{ p.onCard }}" style="{{ p.cardStyle }}">
+                <sc-if value="{{ p.isCombo }}" hint-placeholder-val="{{ true }}">
+                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:30px;color:#fff;position:relative">
+                    <image-slot id="slot-combo" style="width:230px;height:230px;display:block" shape="circle" placeholder="Фото комбо"></image-slot>
+                    <div style="font-size:40px;font-weight:800;font-family:'Montserrat';text-align:center">{{ tr.buildCombo }}</div>
+                    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:40px;font-weight:800">{{ comboPriceLabel }}</span><span style="padding:8px 18px;border-radius:14px;background:rgba(255,255,255,.25);font-size:24px;font-weight:700">−160 ₽</span></div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ p.isReal }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:relative">
+                    <image-slot id="{{ p.slotId }}" style="width:100%;height:300px;display:block" shape="rect" placeholder="{{ p.name }}"></image-slot>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:90px;pointer-events:none;opacity:.25">{{ p.icon }}</div>
+                    <sc-if value="{{ p.badge }}" hint-placeholder-val="">
+                      <div style="{{ p.badgeStyle }}">{{ p.badgeLabel }}</div>
+                    </sc-if>
+                    <sc-if value="{{ p.spicy }}" hint-placeholder-val="">
+                      <div style="position:absolute;top:16px;right:16px;width:64px;height:64px;border-radius:50%;background:#e0392b;display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 6px 16px rgba(224,57,43,.5)">🌶️</div>
+                    </sc-if>
+                  </div>
+                  <div style="padding:22px 24px 24px;display:flex;flex-direction:column;flex:1">
+                    <div style="font-size:38px;font-weight:700;line-height:1.1">{{ p.name }}</div>
+                    <div style="font-size:24px;color:var(--muted);margin-top:6px">{{ p.vol }}</div>
+                    <div style="margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;padding-top:20px">
+                      <div style="font-size:46px;font-weight:800;color:var(--accent);font-family:'Montserrat'">{{ p.priceLabel }}</div>
+                      <div onClick="{{ p.onPlus }}" style="width:104px;height:104px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:300;box-shadow:0 8px 24px var(--accentLine)" style-active="transform:scale(.9)">+</div>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <!-- Zone C: sticky cart -->
+      <div style="flex-shrink:0;background:var(--surface);border-top:1px solid var(--line);border-radius:28px 28px 0 0;padding:22px 48px 24px;box-shadow:0 -10px 40px rgba(0,0,0,.18)">
+        <sc-if value="{{ cartEmpty }}" hint-placeholder-val="">
+          <div style="height:150px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:32px">🛒 {{ tr.emptyCart }}</div>
+        </sc-if>
+        <sc-if value="{{ cartHas }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:center;margin-bottom:14px">
+            <span style="font-size:28px;font-weight:600;color:var(--muted)">🛒 {{ cartCount }} {{ tr.positions }}</span>
+            <span style="margin-left:auto;font-size:44px;font-weight:800;color:var(--accent);font-family:'Montserrat'">{{ cartTotalLabel }}</span>
+          </div>
+          <div onClick="{{ goCart }}" style="height:140px;border-radius:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;gap:18px;font-size:40px;font-weight:800;box-shadow:0 10px 30px var(--accentLine)" style-active="transform:scale(.99)">{{ tr.checkout }} · {{ cartTotalLabel }} →</div>
+        </sc-if>
+      </div>
+      <!-- Bottom toolbar: order type + utilities -->
+      <div style="flex-shrink:0;display:flex;align-items:center;gap:14px;padding:12px 36px;border-top:1px solid var(--line);background:linear-gradient(180deg,var(--bg),var(--surface))">
+        <div style="display:flex;gap:8px;background:var(--card);border:2px solid var(--line);border-radius:38px;padding:7px;box-shadow:0 6px 18px rgba(0,0,0,.1)">
+          <div onClick="{{ setHere }}" style="{{ otypeHereMini }}">🍽️ {{ tr.here }}</div>
+          <div onClick="{{ setToGo }}" style="{{ otypeToGoMini }}">🛍️ {{ tr.toGo }}</div>
+        </div>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+          <div onClick="{{ toggleLower }}" style="{{ tbTile }}"><div style="{{ tbCircle }}">♿</div><div style="{{ tbLbl }}">{{ tr.scrLbl }}</div></div>
+          <div onClick="{{ openLangPick }}" style="{{ tbTile }}"><div style="{{ tbCircle }}">🌐</div><div style="{{ tbLbl }}">{{ langLabel }} ▾</div></div>
+          <div onClick="{{ toggleTheme }}" style="{{ tbTile }}"><div style="{{ tbCircle }}">{{ themeIcon }}</div><div style="{{ tbLbl }}">{{ tr.themeLbl }}</div></div>
+          <div onClick="{{ openAuth }}" style="{{ tbTile }}"><div style="{{ tbCircle }}">⭐</div><div style="{{ tbLbl }}">{{ tr.loyalty }}</div></div>
+          <div onClick="{{ callStaff }}" style="{{ tbTile }}"><div style="{{ tbCircleAccent }}">🔔</div><div style="{{ tbLbl }}">{{ tr.help }}</div></div>
+          <div onClick="{{ forceIdle }}" style="{{ tbTile }}"><div style="{{ tbCircle }}">↺</div><div style="{{ tbLbl }}">{{ tr.resetLbl }}</div></div>
+        </div>
+      </div>
+      <!-- Floating cart balls (over menu, no right rail) -->
+      <div style="position:absolute;right:44px;bottom:600px;z-index:20;display:flex;flex-direction:column-reverse;gap:18px;align-items:center;pointer-events:none">
+        <sc-for list="{{ cartItems }}" as="i" hint-placeholder-count="0">
+          <div style="position:relative;pointer-events:auto;animation:ksoPop .35s ease">
+            <div onClick="{{ i.onEdit }}" style="width:118px;height:118px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:56px;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.3)" style-active="transform:scale(.92)">{{ i.icon }}</div>
+            <sc-if value="{{ i.multi }}" hint-placeholder-val=""><div style="position:absolute;bottom:-4px;left:-6px;min-width:50px;height:50px;padding:0 12px;border-radius:25px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;border:3px solid var(--bg)">{{ i.qty }}</div></sc-if>
+            <div onClick="{{ i.onRemove }}" style="position:absolute;top:-8px;right:-8px;width:50px;height:50px;border-radius:50%;background:#e0392b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;border:3px solid var(--bg)" style-active="transform:scale(.9)">✕</div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ showLangPick }}" hint-placeholder-val="">
+        <div onClick="{{ closeLangPick }}" style="position:absolute;inset:0;z-index:30"></div>
+        <div style="position:absolute;left:48px;bottom:150px;z-index:31;background:var(--surface);border:2px solid var(--line);border-radius:26px;padding:18px;box-shadow:0 24px 60px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:10px;min-width:420px">
+          <div onClick="{{ pickLangRu }}" style="{{ langItemRu }}"><div style="width:72px;height:72px;border-radius:50%;overflow:hidden;display:flex;flex-direction:column;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.25)"><div style="flex:1;background:#fff"></div><div style="flex:1;background:#0039A6"></div><div style="flex:1;background:#D52B1E"></div></div>Русский</div>
+          <div onClick="{{ pickLangEn }}" style="{{ langItemEn }}"><div style="width:72px;height:72px;border-radius:50%;overflow:hidden;position:relative;flex-shrink:0;background:#012169;box-shadow:0 2px 8px rgba(0,0,0,.25)"><div style="position:absolute;top:0;bottom:0;left:50%;width:10px;margin-left:-5px;background:#fff"></div><div style="position:absolute;left:0;right:0;top:50%;height:10px;margin-top:-5px;background:#fff"></div><div style="position:absolute;top:0;bottom:0;left:50%;width:5px;margin-left:-2px;background:#C8102E"></div><div style="position:absolute;left:0;right:0;top:50%;height:5px;margin-top:-2px;background:#C8102E"></div></div>English</div>
+          <div onClick="{{ pickLangZh }}" style="{{ langItemZh }}"><div style="width:72px;height:72px;border-radius:50%;overflow:hidden;position:relative;flex-shrink:0;background:#DE2910;box-shadow:0 2px 8px rgba(0,0,0,.25)"><span style="position:absolute;left:8px;top:7px;color:#FFDE00;font-size:18px;line-height:1">★</span></div>中文</div>
+          <div onClick="{{ pickLangDe }}" style="{{ langItemDe }}"><div style="width:72px;height:72px;border-radius:50%;overflow:hidden;display:flex;flex-direction:column;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.25)"><div style="flex:1;background:#000"></div><div style="flex:1;background:#DD0000"></div><div style="flex:1;background:#FFCE00"></div></div>Deutsch</div>
+          <div onClick="{{ pickLangTr }}" style="{{ langItemTr }}"><div style="width:72px;height:72px;border-radius:50%;overflow:hidden;position:relative;flex-shrink:0;background:#E30A17;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.25)"><span style="color:#fff;font-size:22px;line-height:1">☪</span></div>Türkçe</div>
+        </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- ============ PRODUCT DETAIL ============ -->
+    <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.34);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:80;padding:50px">
+      <div style="width:930px;max-height:1580px;background:var(--bg);border-radius:44px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 110px rgba(0,0,0,.6)">
+      <div style="position:relative;height:440px;flex-shrink:0;background:var(--card)">
+        <image-slot id="{{ pd.slotId }}" style="width:100%;height:440px;display:block" shape="rect" placeholder="{{ pd.name }}"></image-slot>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:170px;pointer-events:none;opacity:.22">{{ pd.icon }}</div>
+        <div onClick="{{ backToMenu }}" style="position:absolute;top:28px;right:28px;width:84px;height:84px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer">✕</div>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:44px 48px 40px;text-align:center">
+        <div style="font-family:'Montserrat';font-weight:800;font-size:60px;letter-spacing:6px;text-transform:uppercase;line-height:1.05">{{ pd.name }}</div>
+        <div style="font-size:28px;color:var(--muted);margin-top:12px">{{ pd.subtitle }}</div>
+        <div style="display:flex;justify-content:center;gap:12px;margin-top:22px;flex-wrap:wrap">
+          <span style="padding:12px 22px;border-radius:18px;background:var(--card);font-size:24px;color:var(--muted)"><b style="color:var(--fg)">{{ pd.kcal }}</b> {{ tr.kcal }}</span>
+          <span style="padding:12px 22px;border-radius:18px;background:var(--card);font-size:24px;color:var(--muted)"><b style="color:var(--fg)">{{ pd.prot }}</b> Б</span>
+          <span style="padding:12px 22px;border-radius:18px;background:var(--card);font-size:24px;color:var(--muted)"><b style="color:var(--fg)">{{ pd.fat }}</b> Ж</span>
+          <span style="padding:12px 22px;border-radius:18px;background:var(--card);font-size:24px;color:var(--muted)"><b style="color:var(--fg)">{{ pd.carb }}</b> У</span>
+        </div>
+
+        <!-- size segmented -->
+        <div style="display:flex;gap:8px;margin:36px auto 0;max-width:780px;background:var(--card);border:2px solid var(--line);border-radius:50px;padding:8px">
+          <sc-for list="{{ pd.sizes }}" as="s" hint-placeholder-count="2">
+            <div onClick="{{ s.onClick }}" style="{{ s.style }}">{{ s.label }}</div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ pd.comboOffer }}" hint-placeholder-val="">
+          <div onClick="{{ pd.goCombo }}" style="display:flex;align-items:center;gap:20px;margin-top:36px;padding:26px 30px;border-radius:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;cursor:pointer;box-shadow:0 10px 28px var(--accentLine)" style-active="transform:scale(.99)">
+            <span style="font-size:54px">🎁</span>
+            <span style="font-size:30px;font-weight:700;text-align:left;flex:1">{{ tr.comboOffer }} 160 ₽</span>
+            <span style="font-size:44px">→</span>
+          </div>
+        </sc-if>
+        <div style="font-family:'Montserrat';font-weight:700;font-size:40px;margin-top:48px">{{ tr.customize }}</div>
+        <div style="font-size:26px;color:var(--muted);margin-top:8px">{{ tr.customizeSub }}</div>
+
+        <!-- meat (required) -->
+        <div style="display:flex;align-items:center;margin:34px 0 18px">
+          <span style="font-size:28px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">{{ tr.milk }}</span>
+          <span style="margin-left:auto;padding:8px 18px;border-radius:14px;background:var(--accentSoft);color:var(--accent);font-size:22px;font-weight:700;text-transform:uppercase">{{ tr.required }}</span>
+        </div>
+        <div style="display:flex;gap:26px;overflow-x:auto;padding-bottom:10px;justify-content:safe center">
+          <sc-for list="{{ pd.milk }}" as="m" hint-placeholder-count="4">
+            <div onClick="{{ m.onClick }}" style="display:flex;flex-direction:column;align-items:center;flex:0 0 auto;cursor:pointer" style-active="transform:scale(.94)">
+              <div style="{{ m.circleStyle }}">{{ m.icon }}</div>
+              <div style="{{ m.nameStyle }}">{{ m.name }}</div>
+              <div style="font-size:22px;color:var(--muted)">{{ m.priceLabel }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- addons -->
+        <div style="display:flex;align-items:center;margin:36px 0 18px">
+          <span style="font-size:28px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">{{ tr.addons }}</span>
+        </div>
+        <div style="display:flex;gap:26px;overflow-x:auto;padding-bottom:10px;justify-content:safe center">
+          <sc-for list="{{ pd.addons }}" as="a" hint-placeholder-count="4">
+            <div onClick="{{ a.onClick }}" style="display:flex;flex-direction:column;align-items:center;flex:0 0 auto;cursor:pointer" style-active="transform:scale(.94)">
+              <div style="{{ a.circleStyle }}">{{ a.icon }}</div>
+              <div style="{{ a.nameStyle }}">{{ a.name }}</div>
+              <div style="font-size:22px;color:var(--accent)">{{ a.priceLabel }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- INLINE UPSELL "при выборе" -->
+        <div style="margin-top:44px;padding:28px;border-radius:24px;background:var(--accentSoft);border:1px solid var(--accentLine);text-align:left">
+          <div style="font-size:30px;font-weight:700;color:var(--accent);margin-bottom:20px">🤝 {{ tr.withThis }}</div>
+          <div style="display:flex;gap:18px;overflow-x:auto">
+            <sc-for list="{{ pd.cross }}" as="u" hint-placeholder-count="3">
+              <div onClick="{{ u.onAdd }}" style="flex:0 0 200px;text-align:center;padding:22px 16px;background:var(--card);border-radius:20px;border:2px solid var(--line);cursor:pointer" style-active="transform:scale(.97)">
+                <div style="font-size:60px">{{ u.icon }}</div>
+                <div style="font-size:26px;font-weight:600;margin-top:8px">{{ u.name }}</div>
+                <div style="font-size:28px;font-weight:800;color:var(--accent);margin-top:6px">+{{ u.priceLabel }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <!-- Zone C bottom -->
+      <div style="flex-shrink:0;background:var(--surface);border-top:1px solid var(--line);padding:26px 48px;display:flex;align-items:center;gap:28px;box-shadow:0 -10px 40px rgba(0,0,0,.18)">
+        <div style="display:flex;align-items:center;gap:8px;background:var(--card);border-radius:24px;padding:8px">
+          <div onClick="{{ pd.dec }}" style="width:104px;height:104px;border-radius:20px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:50px;cursor:pointer" style-active="transform:scale(.92)">−</div>
+          <span style="font-size:46px;font-weight:800;min-width:70px;text-align:center">{{ pd.qty }}</span>
+          <div onClick="{{ pd.inc }}" style="width:104px;height:104px;border-radius:20px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:50px;cursor:pointer" style-active="transform:scale(.92)">+</div>
+        </div>
+        <div onClick="{{ pd.add }}" style="{{ pd.ctaStyle }}">{{ pd.ctaLabel }}</div>
+      </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ============ COMBO ============ -->
+    <sc-if value="{{ isCombo }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg)">
+      <div style="height:150px;flex-shrink:0;display:flex;align-items:center;gap:24px;padding:0 48px;border-bottom:1px solid var(--line)">
+        <div onClick="{{ backToMenu }}" style="width:80px;height:80px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer">←</div>
+        <div style="font-family:'Montserrat';font-weight:800;font-size:48px">{{ tr.buildCombo }} 🎁</div>
+        <div style="margin-left:auto;padding:14px 28px;border-radius:18px;background:var(--accentSoft);color:var(--accent);font-size:32px;font-weight:700">−160 ₽</div>
+      </div>
+      <div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:16px;padding:16px 48px;border-bottom:1px solid var(--line);background:var(--accentSoft)">
+        <sc-for list="{{ comboPreview }}" as="p" hint-placeholder-count="4">
+          <div style="{{ p.boxStyle }}">{{ p.icon }}</div>
+        </sc-for>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:32px 48px">
+        <sc-for list="{{ comboSteps }}" as="st" hint-placeholder-count="4">
+          <div style="{{ st.boxStyle }}">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px">
+              <div style="{{ st.numStyle }}">{{ st.num }}</div>
+              <span style="{{ st.titleStyle }}">{{ st.title }}</span>
+              <span style="margin-left:auto;font-size:24px;color:var(--accent)">{{ st.hint }}</span>
+            </div>
+            <div style="display:flex;gap:18px;overflow-x:auto;padding-bottom:8px">
+              <sc-for list="{{ st.options }}" as="o" hint-placeholder-count="3">
+                <div onClick="{{ o.onClick }}" style="{{ o.style }}">
+                  <div style="font-size:70px">{{ o.icon }}</div>
+                  <div style="font-size:26px;font-weight:600;margin-top:8px">{{ o.name }}</div>
+                  <div style="font-size:22px;color:var(--muted)">{{ o.priceLabel }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex-shrink:0;background:var(--surface);border-top:1px solid var(--line);padding:26px 48px;box-shadow:0 -10px 40px rgba(0,0,0,.18)">
+        <sc-if value="{{ comboExtraShow }}" hint-placeholder-val="">
+          <div style="display:flex;align-items:center;margin-bottom:12px"><span style="font-size:28px;color:var(--muted)">{{ tr.extraLbl }}</span><span style="margin-left:auto;font-size:32px;font-weight:700;color:var(--accent)">+{{ comboExtraLabel }}</span></div>
+        </sc-if>
+        <div style="display:flex;align-items:center;margin-bottom:18px">
+          <span style="font-size:30px;color:var(--muted)">{{ tr.yourCombo }}</span>
+          <span style="margin-left:auto;font-size:48px;font-weight:800;color:var(--accent);font-family:'Montserrat'">{{ comboPriceLabel }} <span style="text-decoration:line-through;color:var(--muted2);font-size:30px">{{ comboOldLabel }}</span></span>
+        </div>
+        <div onClick="{{ addCombo }}" style="{{ comboCtaStyle }}">{{ comboCtaLabel }}</div>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ============ FULL CART ============ -->
+    <sc-if value="{{ isCart }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg)">
+      <div style="height:150px;flex-shrink:0;display:flex;align-items:center;gap:24px;padding:0 48px;border-bottom:1px solid var(--line)">
+        <div onClick="{{ backToMenu }}" style="width:80px;height:80px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer">←</div>
+        <div style="font-family:'Montserrat';font-weight:800;font-size:48px">{{ tr.cartTitle }}</div>
+        <div onClick="{{ clearCart }}" style="margin-left:auto;font-size:28px;color:var(--muted);cursor:pointer">{{ tr.clear }}</div>
+      </div>
+      <div style="display:flex;gap:14px;padding:24px 48px 0">
+        <div onClick="{{ setHere }}" style="{{ otypeHereStyleC }}">🍽️ {{ tr.here }}</div>
+        <div onClick="{{ setToGo }}" style="{{ otypeToGoStyleC }}">🛍️ {{ tr.toGo }}</div>
+      </div>
+      <sc-if value="{{ loggedIn }}" hint-placeholder-val="">
+        <div style="margin:20px 48px 0;display:flex;align-items:center;gap:16px;padding:22px 30px;border-radius:22px;background:var(--accentSoft);border:1px solid var(--accentLine)">
+          <span style="font-size:40px">⭐</span>
+          <span style="font-size:30px;font-weight:600;color:var(--fg)">{{ tr.yourBonuses }}</span>
+          <span style="margin-left:auto;font-size:38px;font-weight:800;color:var(--accent);font-family:'Montserrat'">{{ bonusLabel }}</span>
+        </div>
+      </sc-if>
+      <div style="flex:1;overflow-y:auto;padding:24px 48px">
+        <sc-for list="{{ cartItems }}" as="i" hint-placeholder-count="3">
+          <div style="display:flex;gap:24px;padding:28px 0;border-bottom:1px solid var(--line);align-items:center">
+            <div style="width:130px;height:130px;border-radius:22px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:64px;flex-shrink:0">{{ i.icon }}</div>
+            <div style="flex:1">
+              <div style="font-size:36px;font-weight:700">{{ i.name }}</div>
+              <div style="font-size:26px;color:var(--accent);margin:6px 0">{{ i.sub }}</div>
+              <sc-if value="{{ i.editable }}" hint-placeholder-val=""><div onClick="{{ i.onEdit }}" style="display:inline-flex;align-items:center;gap:8px;font-size:24px;color:var(--muted);font-weight:600;cursor:pointer;border:2px solid var(--line);border-radius:14px;padding:8px 18px;margin:2px 0 4px" style-active="transform:scale(.96)">✎ {{ tr.editItem }}</div></sc-if>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px">
+                <span style="font-size:40px;font-weight:800">{{ i.priceLabel }}</span>
+                <div style="display:flex;align-items:center;gap:16px">
+                  <div onClick="{{ i.dec }}" style="width:80px;height:80px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer" style-active="transform:scale(.9)">−</div>
+                  <span style="font-size:36px;font-weight:700;min-width:50px;text-align:center">{{ i.qty }}</span>
+                  <div onClick="{{ i.inc }}" style="width:80px;height:80px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer" style-active="transform:scale(.9)">+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+
+      </div>
+      <sc-if value="{{ cartHasUpsell }}" hint-placeholder-val="">
+        <div style="flex-shrink:0;background:var(--accentSoft);border-top:1px solid var(--accentLine);padding:14px 40px 12px">
+          <div style="font-size:26px;font-weight:800;color:var(--accent);margin-bottom:10px">💡 {{ tr.often }}</div>
+          <div style="display:flex;gap:14px;overflow-x:auto;padding-bottom:6px">
+            <sc-for list="{{ cartUpsell }}" as="u" hint-placeholder-count="3">
+              <div onClick="{{ u.onAdd }}" style="flex:0 0 auto;display:flex;align-items:center;gap:14px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px 12px 18px;cursor:pointer" style-active="transform:scale(.97)">
+                <div style="font-size:44px">{{ u.icon }}</div>
+                <div><div style="font-size:24px;font-weight:600;white-space:nowrap">{{ u.name }}</div><div style="font-size:22px;font-weight:800;color:var(--accent)">+{{ u.priceLabel }}</div></div>
+                <div style="padding:12px 22px;border-radius:14px;background:var(--accent);color:#fff;font-size:24px;font-weight:700;white-space:nowrap">{{ tr.add }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <div style="flex-shrink:0;background:var(--surface);border-top:1px solid var(--line);padding:28px 48px;box-shadow:0 -10px 40px rgba(0,0,0,.18)">
+        <div style="display:flex;align-items:center;margin-bottom:20px">
+          <span style="font-size:30px;color:var(--muted)">{{ cartCount }} {{ tr.positions }}</span>
+          <span style="margin-left:auto;font-size:30px;color:var(--muted)">{{ tr.total }}</span>
+          <span style="margin-left:18px;font-size:56px;font-weight:800;color:var(--accent);font-family:'Montserrat'">{{ cartTotalLabel }}</span>
+        </div>
+        <div onClick="{{ goPay }}" style="height:170px;border-radius:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:800;box-shadow:0 12px 36px var(--accentLine)" style-active="transform:scale(.99)">{{ tr.pay }} · {{ cartTotalLabel }}</div>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ============ PAYMENT ============ -->
+    <sc-if value="{{ isPay }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg)">
+      <div onClick="{{ goCart }}" style="position:absolute;top:48px;left:48px;width:88px;height:88px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:44px;cursor:pointer;z-index:5">←</div>
+      <sc-if value="{{ payMethodStep }}" hint-placeholder-val="{{ true }}">
+        <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:90px 80px 60px">
+          <div style="font-family:'Montserrat';font-weight:800;font-size:60px">{{ tr.payTitle }}</div>
+          <div style="font-size:56px;font-weight:900;color:var(--accent);font-family:'Montserrat'">{{ payTotalLabel }}</div>
+          <sc-if value="{{ notLoggedIn }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ openAuth }}" style="display:flex;align-items:center;gap:16px;width:100%;max-width:780px;padding:24px 30px;border-radius:22px;background:var(--accentSoft);border:2px dashed var(--accentLine);cursor:pointer" style-active="transform:scale(.99)"><span style="font-size:40px">⭐</span><span style="font-size:28px;font-weight:600;flex:1;text-align:left">{{ tr.authForBonus }}</span><span style="padding:14px 28px;border-radius:16px;background:var(--accent);color:#fff;font-size:26px;font-weight:700">{{ tr.login }}</span></div>
+          </sc-if>
+          <sc-if value="{{ bonusApplicable }}" hint-placeholder-val="">
+            <div style="width:100%;max-width:780px;padding:24px 30px;border-radius:22px;background:var(--accentSoft);border:2px solid var(--accentLine)">
+              <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px"><span style="font-size:36px">⭐</span><span style="font-size:28px;font-weight:600;flex:1;text-align:left">{{ tr.useBonusLbl }}</span><span style="font-size:26px;color:var(--muted)">{{ tr.available }}: {{ maxBonusLabel }}</span></div>
+              <div style="display:flex;align-items:center;gap:16px">
+                <div onClick="{{ bonusDec }}" style="{{ bonusBtn }}">−</div>
+                <div style="flex:1;text-align:center;font-size:44px;font-weight:800;color:var(--accent);font-family:'Montserrat'">{{ bonusUseLabel }}</div>
+                <div onClick="{{ bonusInc }}" style="{{ bonusBtn }}">+</div>
+                <div onClick="{{ bonusAll }}" style="padding:0 28px;height:96px;border-radius:24px;background:var(--accent);color:#fff;display:flex;align-items:center;font-size:30px;font-weight:700;cursor:pointer">{{ tr.allBtn }}</div>
+              </div>
+            </div>
+          </sc-if>
+          <div style="display:flex;flex-direction:column;gap:20px;width:100%;max-width:780px">
+            <div onClick="{{ payCash }}" style="{{ payOptStyle }}"><span style="font-size:54px">💵</span><span style="flex:1;text-align:left">{{ tr.payCash }}</span><span style="font-size:40px">→</span></div>
+            <div onClick="{{ payCardH }}" style="{{ payOptStyle }}"><span style="font-size:54px">💳</span><span style="flex:1;text-align:left">{{ tr.payCard }}</span><span style="font-size:40px">→</span></div>
+            <div onClick="{{ paySbpH }}" style="{{ payOptStyle }}"><span style="font-size:54px">📱</span><span style="flex:1;text-align:left">{{ tr.paySbp }}</span><span style="font-size:40px">→</span></div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ payProcessStep }}" hint-placeholder-val="">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;padding:0 80px;text-align:center">
+          <sc-if value="{{ isSbp }}" hint-placeholder-val="">
+            <div style="width:360px;height:360px;background:#fff;border-radius:24px;padding:26px;box-shadow:0 14px 40px rgba(0,0,0,.25)">
+              <div style="width:100%;height:100%;position:relative;background:radial-gradient(#111 32%,transparent 34%);background-size:24px 24px">
+                <div style="position:absolute;top:0;left:0;width:84px;height:84px;border:16px solid #111;background:#fff"></div>
+                <div style="position:absolute;top:0;right:0;width:84px;height:84px;border:16px solid #111;background:#fff"></div>
+                <div style="position:absolute;bottom:0;left:0;width:84px;height:84px;border:16px solid #111;background:#fff"></div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSbp }}" hint-placeholder-val="{{ true }}">
+            <div style="width:300px;height:300px;border-radius:50%;background:var(--accentSoft);display:flex;align-items:center;justify-content:center;font-size:150px;animation:ksoGlow 1.8s infinite">{{ payIcon }}</div>
+          </sc-if>
+          <div style="font-family:'Montserrat';font-weight:800;font-size:54px;line-height:1.1">{{ procHint }}</div>
+          <div style="font-size:60px;font-weight:900;color:var(--accent);font-family:'Montserrat'">{{ payTotalLabel }}</div>
+          <div style="display:flex;align-items:center;gap:18px;color:var(--muted);font-size:32px"><div style="width:40px;height:40px;border:5px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:ksoSpin 1s linear infinite"></div>{{ tr.paying }}</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ paySuccessStep }}" hint-placeholder-val="">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px">
+          <div style="width:320px;height:320px;border-radius:50%;background:#1f8a5b;display:flex;align-items:center;justify-content:center;font-size:170px;color:#fff;animation:ksoPop .5s ease">✓</div>
+          <div style="font-family:'Montserrat';font-weight:900;font-size:80px;color:#1f8a5b">{{ tr.paid }}</div>
+        </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- ============ CONFIRM ============ -->
+    <sc-if value="{{ isConfirm }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;background:radial-gradient(120% 50% at 50% 30%,var(--accentSoft),transparent 60%),var(--bg);padding:0 80px;text-align:center">
+      <div style="font-size:64px">🎉</div>
+      <div style="font-family:'Montserrat';font-weight:700;font-size:42px;color:var(--muted)">{{ tr.yourNumber }}</div>
+      <div style="font-family:'Montserrat';font-weight:900;font-size:210px;line-height:.9;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:ksoPop .6s ease">{{ orderNumber }}</div>
+      <div style="font-size:38px;font-weight:700;color:#1f8a5b">✓ {{ tr.paid }}</div>
+      <div style="width:300px;height:300px;background:#fff;border-radius:24px;padding:24px;box-shadow:0 14px 40px rgba(0,0,0,.2);margin-top:12px">
+        <div style="width:100%;height:100%;position:relative;background:radial-gradient(#111 32%,transparent 34%);background-size:22px 22px">
+          <div style="position:absolute;top:0;left:0;width:72px;height:72px;border:14px solid #111;background:#fff"></div>
+          <div style="position:absolute;top:0;right:0;width:72px;height:72px;border:14px solid #111;background:#fff"></div>
+          <div style="position:absolute;bottom:0;left:0;width:72px;height:72px;border:14px solid #111;background:#fff"></div>
+        </div>
+      </div>
+      <div style="font-size:30px;color:var(--muted);max-width:620px">{{ tr.trackOrder }}</div>
+      <div onClick="{{ newOrder }}" style="margin-top:24px;padding:32px 80px;border-radius:28px;border:3px solid var(--line);font-size:38px;font-weight:700;cursor:pointer" style-active="transform:scale(.97)">{{ tr.newOrder }}</div>
+    </div>
+    </sc-if>
+
+  </div><!-- /shift -->
+
+  <!-- LOWERED BANNER -->
+  <sc-if value="{{ lowered }}" hint-placeholder-val="">
+    <div onClick="{{ toggleLower }}" style="position:absolute;top:0;left:0;right:0;height:90px;display:flex;align-items:center;justify-content:center;gap:18px;background:var(--accent);color:#fff;font-size:30px;font-weight:700;z-index:40;cursor:pointer">↥ {{ tr.raiseScreen }} · {{ tr.loweredBanner }}</div>
+  </sc-if>
+
+  <!-- TOAST -->
+  <sc-if value="{{ toast }}" hint-placeholder-val="">
+    <div style="position:absolute;bottom:160px;left:50%;transform:translateX(-50%);padding:26px 44px;border-radius:22px;background:var(--fg);color:var(--bg);font-size:32px;font-weight:700;z-index:60;box-shadow:0 12px 40px rgba(0,0,0,.4);animation:ksoRise .3s ease">{{ toast }}</div>
+  </sc-if>
+
+  <!-- UPSELL POPUP -->
+  <sc-if value="{{ showUpsell }}" hint-placeholder-val="">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);display:flex;align-items:flex-end;z-index:70">
+      <div style="width:100%;background:var(--surface);border-radius:40px 40px 0 0;padding:48px;animation:ksoRise .35s ease">
+        <div style="width:80px;height:8px;border-radius:4px;background:var(--line);margin:0 auto 30px"></div>
+        <div style="font-family:'Montserrat';font-weight:800;font-size:54px;text-align:center">✨ {{ tr.addToOrder }}</div>
+        <div style="display:flex;gap:24px;margin:40px 0;justify-content:center">
+          <sc-for list="{{ popupUpsell }}" as="u" hint-placeholder-count="3">
+            <div onClick="{{ u.onAdd }}" style="flex:1;max-width:280px;text-align:center;padding:30px 20px;background:var(--card);border-radius:28px;border:2px solid var(--line);cursor:pointer" style-active="transform:scale(.96)">
+              <div style="font-size:90px">{{ u.icon }}</div>
+              <div style="font-size:32px;font-weight:700;margin-top:14px">{{ u.name }}</div>
+              <div style="font-size:38px;font-weight:800;color:var(--accent);margin-top:8px">+{{ u.priceLabel }}</div>
+              <div style="margin-top:18px;padding:18px 0;border-radius:18px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:30px;font-weight:700">{{ tr.add }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div onClick="{{ dismissUpsell }}" style="height:130px;border-radius:24px;border:3px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:700;color:var(--muted);cursor:pointer" style-active="transform:scale(.99)">{{ tr.noThanks }} →</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- IDLE DIALOG -->
+  <sc-if value="{{ idle }}" hint-placeholder-val="">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:50px;z-index:90;padding:0 80px;text-align:center">
+      <div style="font-size:140px;animation:ksoBob 1.6s infinite">👋</div>
+      <div style="font-family:'Montserrat';font-weight:900;font-size:80px;color:#fff">{{ tr.stillHere }}</div>
+      <div style="font-size:40px;color:rgba(255,255,255,.7)">{{ tr.resetIn }} <b style="color:var(--accent)">{{ idleCount }}</b> {{ tr.sec }}</div>
+      <div style="display:flex;gap:30px;width:100%;max-width:820px;margin-top:20px">
+        <div onClick="{{ keepGoing }}" style="flex:1;height:180px;border-radius:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:800;box-shadow:0 12px 36px var(--accentLine)" style-active="transform:scale(.98)">{{ tr.yesContinue }}</div>
+        <div onClick="{{ newOrder }}" style="flex:1;height:180px;border-radius:28px;border:3px solid rgba(255,255,255,.3);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700" style-active="transform:scale(.98)">{{ tr.newOrder }}</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- LOYALTY AUTH -->
+  <sc-if value="{{ authOpen }}" hint-placeholder-val="">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:95;padding:50px">
+      <div style="width:860px;background:var(--surface);border-radius:44px;padding:48px;box-shadow:0 40px 110px rgba(0,0,0,.6);position:relative">
+        <div onClick="{{ closeAuth }}" style="position:absolute;top:26px;right:26px;width:78px;height:78px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:38px;color:var(--muted);cursor:pointer">✕</div>
+        <sc-if value="{{ authPhoneStep }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;font-size:72px">⭐</div>
+          <div style="text-align:center;font-family:'Montserrat';font-weight:800;font-size:46px;margin-top:6px">{{ tr.loyaltyTitle }}</div>
+          <div style="text-align:center;font-size:30px;color:var(--muted);margin-top:8px">{{ tr.enterPhone }}</div>
+          <div style="text-align:center;font-family:'Montserrat';font-weight:800;font-size:60px;margin:24px 0 6px">{{ phoneDisplay }}</div>
+        </sc-if>
+        <sc-if value="{{ authOtpStep }}" hint-placeholder-val="">
+          <div style="text-align:center;font-size:72px">✉️</div>
+          <div style="text-align:center;font-family:'Montserrat';font-weight:800;font-size:44px;margin-top:6px">{{ tr.enterCode }}</div>
+          <div style="text-align:center;font-size:26px;color:var(--muted);margin-top:8px">{{ tr.codeSentTo }} {{ phoneDisplay }}</div>
+          <div style="display:flex;gap:22px;justify-content:center;margin:28px 0 6px"><sc-for list="{{ authCode }}" as="b" hint-placeholder-count="4"><div style="{{ b.boxStyle }}">{{ b.ch }}</div></sc-for></div>
+        </sc-if>
+        <sc-if value="{{ authInput }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px">
+            <div onClick="{{ dig1 }}" style="{{ keyStyle }}">1</div><div onClick="{{ dig2 }}" style="{{ keyStyle }}">2</div><div onClick="{{ dig3 }}" style="{{ keyStyle }}">3</div>
+            <div onClick="{{ dig4 }}" style="{{ keyStyle }}">4</div><div onClick="{{ dig5 }}" style="{{ keyStyle }}">5</div><div onClick="{{ dig6 }}" style="{{ keyStyle }}">6</div>
+            <div onClick="{{ dig7 }}" style="{{ keyStyle }}">7</div><div onClick="{{ dig8 }}" style="{{ keyStyle }}">8</div><div onClick="{{ dig9 }}" style="{{ keyStyle }}">9</div>
+            <div onClick="{{ authBack }}" style="{{ keyStyle }}">⌫</div><div onClick="{{ dig0 }}" style="{{ keyStyle }}">0</div><div></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ authPhoneStep }}" hint-placeholder-val="{{ true }}">
+          <div onClick="{{ authSend }}" style="{{ sendStyle }};margin-top:22px">{{ tr.getCode }}</div>
+        </sc-if>
+        <sc-if value="{{ authDoneStep }}" hint-placeholder-val="">
+          <div style="text-align:center;font-size:120px">🎉</div>
+          <div style="text-align:center;font-family:'Montserrat';font-weight:900;font-size:54px">{{ tr.welcomeBack }}</div>
+          <div style="text-align:center;font-size:30px;color:var(--muted);margin-top:14px">{{ tr.yourBonuses }}</div>
+          <div style="text-align:center;font-family:'Montserrat';font-weight:900;font-size:88px;color:var(--accent);margin-top:4px">350 ₽</div>
+          <div onClick="{{ closeAuth }}" style="height:140px;border-radius:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:800;margin-top:28px;cursor:pointer">{{ tr.doneBtn }}</div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:1920},&quot;videoUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot; https://storage.yandexcloud.net/prod-genereativeimg/org/designconfig/videos/545d2fd7-e514-44c9-a721-f02c0383670f_b5969b6a1079d45a.webm&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;comboPrice&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:450,&quot;min&quot;:0,&quot;max&quot;:5000,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    let saved={};
+    try{ saved={theme:localStorage.getItem('ksoTheme'),lang:localStorage.getItem('ksoLang'),lowered:localStorage.getItem('ksoLowered')}; }catch(e){}
+    this.state={
+      screen:'welcome', lang:saved.lang||'ru', theme:saved.theme||'dark',
+      lowered:saved.lowered==='1', catId:'shawarma', cart:[],
+      product:null, combo:{main:'shawarma',side:'fries',drink:null,sauce:null},
+      showUpsell:false, idle:false, idleCount:10, toast:'', payStep:'method', payMethod:'', bonusUse:0, orderNumber:'', _otype:'here', showLangPick:false, returnToCart:false, fabOpen:false, loggedIn:false, bonus:0, cartUpsellHidden:false, showCartRec:false, auth:{open:false,step:'phone',phone:'',code:''},
+    };
+    this.lastAct=Date.now();
+    this.DEFAULT_VIDEO='https://storage.yandexcloud.net/prod-genereativeimg/org/designconfig/videos/545d2fd7-e514-44c9-a721-f02c0383670f_b5969b6a1079d45a.webm';
+    this.BANNER_VIDEO='https://storage.yandexcloud.net/prod-genereativeimg/org/designconfig/videos/545d2fd7-e514-44c9-a721-f02c0383670f_d38c46e2d3e76c78.webm';
+  }
+
+  // ===== DATA =====
+  CATS=[
+    {id:'shawarma',icon:'🌯',ru:'Шаверма',en:'Shawarma',zh:'沙威玛',de:'Schawarma',tr:'Dürüm'},
+    {id:'signature',icon:'⭐',ru:'Фирменная',en:'Signature',zh:'招牌',de:'Spezial',tr:'Özel'},
+    {id:'doner',icon:'🥙',ru:'Донеры',en:'Doner',zh:'土耳其烤肉',de:'Döner',tr:'Döner'},
+    {id:'rolls',icon:'🍙',ru:'Роллы',en:'Rolls',zh:'卷饼',de:'Rolls',tr:'Rulo'},
+    {id:'hot',icon:'🍖',ru:'Горячее',en:'Hot dishes',zh:'热菜',de:'Warme',tr:'Sıcak'},
+    {id:'salad',icon:'🥗',ru:'Салаты',en:'Salads',zh:'沙拉',de:'Salate',tr:'Salata'},
+    {id:'snack',icon:'🍟',ru:'Закуски',en:'Snacks',zh:'小吃',de:'Snacks',tr:'Atıştırma'},
+    {id:'sauce',icon:'🥫',ru:'Соусы',en:'Sauces',zh:'酱料',de:'Soßen',tr:'Soslar'},
+    {id:'cold',icon:'🥤',ru:'Напитки',en:'Cold drinks',zh:'冷饮',de:'Kalt',tr:'Soğuk'},
+    {id:'hotdrink',icon:'☕',ru:'Горячие',en:'Hot drinks',zh:'热饮',de:'Heiß',tr:'Sıcak içecek'},
+    {id:'breakfast',icon:'🍳',ru:'Завтраки',en:'Breakfast',zh:'早餐',de:'Frühstück',tr:'Kahvaltı'},
+  ];
+  PRODUCTS={
+    shawarma:[
+      {id:'sh_cl',ru:'Шаверма Классик',en:'Classic Shawarma',vol:'330 г',price:320,badge:'hit',icon:'🌯'},
+      {id:'sh_xl',ru:'Шаверма XL',en:'Shawarma XL',vol:'450 г',price:420,icon:'🌯'},
+      {id:'sh_ch',ru:'Шаверма Чикен',en:'Chicken Shawarma',vol:'320 г',price:300,icon:'🌯'},
+      {id:'sh_sp',ru:'Шаверма Острая',en:'Spicy Shawarma',vol:'330 г',price:340,badge:'new',icon:'🌶️'},
+      {id:'sh_vg',ru:'Вегетарианская',en:'Veggie Shawarma',vol:'300 г',price:290,icon:'🥬'},
+    ],
+    signature:[
+      {id:'sg_fr',ru:'Шаверно Фирменная',en:'Signature Shawarma',vol:'480 г',price:480,badge:'hit',icon:'⭐'},
+      {id:'sg_db',ru:'Двойное мясо',en:'Double Meat',vol:'520 г',price:520,icon:'🥩'},
+      {id:'sg_ch',ru:'Сырная бомба',en:'Cheese Bomb',vol:'460 г',price:460,badge:'new',icon:'🧀'},
+      {id:'sg_fl',ru:'Фалафель Премиум',en:'Premium Falafel',vol:'380 г',price:380,icon:'🧆'},
+    ],
+    doner:[
+      {id:'dn_cl',ru:'Донер Классик',en:'Classic Doner',vol:'330 г',price:330,icon:'🥙'},
+      {id:'dn_xl',ru:'Донер XL',en:'Doner XL',vol:'450 г',price:430,badge:'hit',icon:'🥙'},
+      {id:'dn_bx',ru:'Донер в коробочке',en:'Doner Box',vol:'400 г',price:360,icon:'🍱'},
+      {id:'dn_pl',ru:'Кебаб-плейт',en:'Kebab Plate',vol:'500 г',price:450,icon:'🍢'},
+    ],
+    rolls:[
+      {id:'rl_ch',ru:'Ролл с курицей',en:'Chicken Roll',vol:'280 г',price:280,icon:'🍙'},
+      {id:'rl_bf',ru:'Ролл с говядиной',en:'Beef Roll',vol:'290 г',price:320,badge:'hit',icon:'🍙'},
+      {id:'rl_fl',ru:'Ролл фалафель',en:'Falafel Roll',vol:'270 г',price:260,icon:'🧆'},
+      {id:'rl_cz',ru:'Цезарь-ролл',en:'Caesar Roll',vol:'290 г',price:300,badge:'new',icon:'🥬'},
+    ],
+    hot:[
+      {id:'ht_wg',ru:'Куриные крылья',en:'Chicken Wings',vol:'8 шт',price:360,badge:'hit',icon:'🍗'},
+      {id:'ht_ng',ru:'Наггетсы',en:'Nuggets',vol:'9 шт',price:280,icon:'🍗'},
+      {id:'ht_pt',ru:'Картофель по-деревенски',en:'Country Potatoes',vol:'200 г',price:220,icon:'🥔'},
+      {id:'ht_lk',ru:'Люля-кебаб',en:'Lula Kebab',vol:'250 г',price:420,icon:'🍢'},
+    ],
+    salad:[
+      {id:'sl_cz',ru:'Цезарь',en:'Caesar',vol:'220 г',price:320,badge:'hit',icon:'🥗'},
+      {id:'sl_gr',ru:'Греческий',en:'Greek',vol:'220 г',price:300,icon:'🥗'},
+      {id:'sl_vg',ru:'Овощной',en:'Veggie',vol:'200 г',price:220,icon:'🥗'},
+    ],
+    snack:[
+      {id:'sn_fr',ru:'Картофель фри',en:'Fries',vol:'150 г',price:150,badge:'hit',icon:'🍟'},
+      {id:'sn_cs',ru:'Сырные палочки',en:'Cheese Sticks',vol:'6 шт',price:240,icon:'🧀'},
+      {id:'sn_or',ru:'Луковые кольца',en:'Onion Rings',vol:'8 шт',price:220,icon:'🧅'},
+      {id:'sn_ng',ru:'Наггетсы',en:'Nuggets',vol:'6 шт',price:260,icon:'🍗'},
+    ],
+    sauce:[
+      {id:'sc_gr',ru:'Чесночный',en:'Garlic',vol:'50 г',price:50,badge:'hit',icon:'🧄'},
+      {id:'sc_sp',ru:'Острый',en:'Spicy',vol:'50 г',price:50,icon:'🌶️'},
+      {id:'sc_bbq',ru:'Барбекю',en:'BBQ',vol:'50 г',price:50,icon:'🍖'},
+      {id:'sc_ch',ru:'Сырный',en:'Cheese',vol:'50 г',price:70,icon:'🧀'},
+      {id:'sc_kt',ru:'Кетчуп',en:'Ketchup',vol:'50 г',price:40,icon:'🥫'},
+    ],
+    cold:[
+      {id:'cd_co',ru:'Кола',en:'Cola',vol:'0,5 л',price:150,icon:'🥤'},
+      {id:'cd_lm',ru:'Лимонад',en:'Lemonade',vol:'0,4 л',price:200,badge:'hit',icon:'🍋'},
+      {id:'cd_mo',ru:'Морс',en:'Berry Drink',vol:'0,4 л',price:160,icon:'🧃'},
+      {id:'cd_ay',ru:'Айран',en:'Ayran',vol:'0,3 л',price:140,icon:'🥛'},
+      {id:'cd_wt',ru:'Вода',en:'Water',vol:'0,5 л',price:90,icon:'💧'},
+    ],
+    hotdrink:[
+      {id:'hd_cf',ru:'Кофе',en:'Coffee',vol:'0,3 л',price:150,icon:'☕'},
+      {id:'hd_cp',ru:'Капучино',en:'Cappuccino',vol:'0,3 л',price:220,badge:'hit',icon:'☕'},
+      {id:'hd_te',ru:'Чай',en:'Tea',vol:'0,4 л',price:120,icon:'🍵'},
+      {id:'hd_cc',ru:'Какао',en:'Cocoa',vol:'0,3 л',price:190,icon:'☕'},
+    ],
+    breakfast:[
+      {id:'bf_sh',ru:'Шаверма-завтрак',en:'Breakfast Shawarma',vol:'280 г',price:260,badge:'hit',icon:'🌯'},
+      {id:'bf_om',ru:'Омлет-ролл',en:'Omelette Roll',vol:'250 г',price:240,icon:'🍳'},
+      {id:'bf_sy',ru:'Сырники',en:'Cheese Pancakes',vol:'200 г',price:280,icon:'🥞'},
+      {id:'bf_ka',ru:'Каша',en:'Porridge',vol:'250 г',price:180,icon:'🥣'},
+    ],
+  };
+  CROSS=[
+    {id:'fri',ru:'Картофель фри',en:'Fries',price:150,icon:'🍟'},
+    {id:'sauce',ru:'Соус',en:'Sauce',price:50,icon:'🥫'},
+    {id:'cola',ru:'Кола',en:'Cola',price:150,icon:'🥤'},
+    {id:'nug',ru:'Наггетсы',en:'Nuggets',price:280,icon:'🍗'},
+    {id:'cstick',ru:'Сырные палочки',en:'Cheese sticks',price:240,icon:'🧀'},
+  ];
+  MILK=[
+    {id:'chk',ru:'Курица',en:'Chicken',icon:'🍗',price:0},
+    {id:'beef',ru:'Говядина',en:'Beef',icon:'🥩',price:60},
+    {id:'lamb',ru:'Баранина',en:'Lamb',icon:'🐑',price:90},
+    {id:'fal',ru:'Фалафель',en:'Falafel',icon:'🧆',price:0},
+  ];
+  ADDONS=[
+    {id:'cheese',ru:'Сыр',en:'Cheese',icon:'🧀',price:50},
+    {id:'jal',ru:'Халапеньо',en:'Jalapeño',icon:'🌶️',price:40},
+    {id:'dbl',ru:'Двойное мясо',en:'Double meat',icon:'🥩',price:120},
+    {id:'veg',ru:'Гриль-овощи',en:'Grilled veg',icon:'🫑',price:60},
+  ];
+  COMBO={
+    main:[{id:'shawarma',ru:'Шаверма',en:'Shawarma',icon:'🌯',price:0},{id:'doner',ru:'Донер',en:'Doner',icon:'🥙',price:0},{id:'roll',ru:'Ролл',en:'Roll',icon:'🍙',price:30}],
+    side:[{id:'fries',ru:'Фри',en:'Fries',icon:'🍟',price:0},{id:'rings',ru:'Кольца',en:'Rings',icon:'🧅',price:60},{id:'nug',ru:'Наггетсы',en:'Nuggets',icon:'🍗',price:90}],
+    drink:[{id:'cola',ru:'Кола',en:'Cola',icon:'🥤',price:0},{id:'lemon',ru:'Лимонад',en:'Lemonade',icon:'🍋',price:0},{id:'ayran',ru:'Айран',en:'Ayran',icon:'🥛',price:0}],
+    sauce:[{id:'garlic',ru:'Чесночный',en:'Garlic',icon:'🧄',price:0},{id:'spicy',ru:'Острый',en:'Spicy',icon:'🌶️',price:0},{id:'bbq',ru:'Барбекю',en:'BBQ',icon:'🍖',price:0}],
+  };
+  I18N={
+    tapToStart:{ru:'Коснитесь языка, чтобы начать',en:'Tap a language to start',zh:'点击语言开始',de:'Sprache antippen zum Start',tr:'Başlamak için dil seçin'},
+    chooseLang:{ru:'Выберите язык',en:'Choose your language',zh:'选择语言',de:'Sprache wählen',tr:'Dil seçin'},
+    howReceive:{ru:'Как вы хотите получить заказ?',en:'How would you like your order?',zh:'您想如何取餐？',de:'Wie möchten Sie bestellen?',tr:'Siparişinizi nasıl istersiniz?'},
+    here:{ru:'Здесь',en:'Dine in',zh:'堂食',de:'Hier essen',tr:'Burada'},
+    toGo:{ru:'С собой',en:'Take away',zh:'外带',de:'Mitnehmen',tr:'Paket'},
+    hereDesc:{ru:'Подадим на поднос',en:'Served on a tray',zh:'托盘上桌',de:'Auf dem Tablett',tr:'Tepside servis'},
+    toGoDesc:{ru:'Упакуем с собой',en:'Packed to go',zh:'打包带走',de:'Zum Mitnehmen verpackt',tr:'Paketlenir'},
+    menu:{ru:'Меню',en:'Menu',zh:'菜单',de:'Menü',tr:'Menü'},
+    cartTitle:{ru:'Корзина',en:'Your cart',zh:'购物车',de:'Warenkorb',tr:'Sepet'},
+    checkout:{ru:'К оплате',en:'Checkout',zh:'去结账',de:'Zur Kasse',tr:'Ödemeye geç'},
+    pay:{ru:'Оплатить',en:'Pay',zh:'支付',de:'Bezahlen',tr:'Öde'},
+    addToCart:{ru:'В корзину',en:'Add to cart',zh:'加入购物车',de:'Hinzufügen',tr:'Sepete ekle'},
+    add:{ru:'Добавить',en:'Add',zh:'添加',de:'Hinzufügen',tr:'Ekle'},
+    positions:{ru:'поз.',en:'items',zh:'件',de:'Pos.',tr:'ürün'},
+    buildCombo:{ru:'Собери комбо',en:'Build a combo',zh:'搭配套餐',de:'Combo bauen',tr:'Combo oluştur'},
+    addCombo:{ru:'Добавить комбо в корзину',en:'Add combo to cart',zh:'添加套餐',de:'Combo hinzufügen',tr:'Combo ekle'},
+    pickStep:{ru:'выберите',en:'choose',zh:'请选择',de:'wählen',tr:'seçin'},
+    often:{ru:'Часто берут вместе',en:'Frequently bought together',zh:'常一起购买',de:'Oft zusammen gekauft',tr:'Sık birlikte alınır'},
+    withThis:{ru:'С этим берут',en:'Goes well with',zh:'搭配推荐',de:'Passt gut dazu',tr:'Yanında alın'},
+    addToOrder:{ru:'Добавить к заказу?',en:'Add to your order?',zh:'添加到订单？',de:'Zur Bestellung?',tr:'Siparişe eklensin mi?'},
+    noThanks:{ru:'Нет, спасибо',en:'No, thanks',zh:'不用了',de:'Nein, danke',tr:'Hayır, teşekkürler'},
+    required:{ru:'обязательно',en:'required',zh:'必选',de:'erforderlich',tr:'zorunlu'},
+    customize:{ru:'Настрой, как ты любишь',en:'Make it yours',zh:'按你喜好定制',de:'Nach Wunsch',tr:'Kendine göre ayarla'},
+    customizeSub:{ru:'добавок можно несколько — выбери количество',en:'add as many extras as you like',zh:'可添加多种配料',de:'beliebig viele Extras',tr:'istediğin kadar ekle'},
+    pickPrefix:{ru:'Выберите:',en:'Choose:',zh:'请选择：',de:'Wählen:',tr:'Seçin:'},
+    comboOffer:{ru:'Соберите комбо и сэкономьте',en:'Build a combo and save',zh:'搭配套餐更省',de:'Combo bauen und sparen',tr:'Combo yap, kazan'},
+    editItem:{ru:'Изменить',en:'Edit',zh:'修改',de:'Ändern',tr:'Düzenle'},
+    scrLbl:{ru:'Экран',en:'Screen',zh:'屏幕',de:'Bildschirm',tr:'Ekran'},
+    themeLbl:{ru:'Тема',en:'Theme',zh:'主题',de:'Thema',tr:'Tema'},
+    resetLbl:{ru:'Сброс',en:'Reset',zh:'重置',de:'Reset',tr:'Sıfırla'},
+    loyalty:{ru:'Бонусы',en:'Rewards',zh:'积分',de:'Bonus',tr:'Puan'},
+    loyaltyTitle:{ru:'Программа лояльности',en:'Loyalty program',zh:'会员计划',de:'Treueprogramm',tr:'Sadakat programı'},
+    enterPhone:{ru:'Введите номер телефона',en:'Enter your phone number',zh:'输入手机号',de:'Telefonnummer eingeben',tr:'Telefon numaranızı girin'},
+    getCode:{ru:'Получить код',en:'Get code',zh:'获取验证码',de:'Code erhalten',tr:'Kod al'},
+    enterCode:{ru:'Введите код из SMS',en:'Enter the SMS code',zh:'输入短信验证码',de:'SMS-Code eingeben',tr:'SMS kodunu girin'},
+    codeSentTo:{ru:'Код отправлен на',en:'Code sent to',zh:'验证码已发送至',de:'Code gesendet an',tr:'Kod gönderildi'},
+    welcomeBack:{ru:'Добро пожаловать!',en:'Welcome!',zh:'欢迎！',de:'Willkommen!',tr:'Hoş geldiniz!'},
+    yourBonuses:{ru:'Ваши бонусы',en:'Your rewards',zh:'您的积分',de:'Ihr Bonus',tr:'Puanınız'},
+    doneBtn:{ru:'Продолжить',en:'Continue',zh:'继续',de:'Weiter',tr:'Devam'},
+    payTitle:{ru:'Способ оплаты',en:'Payment method',zh:'支付方式',de:'Zahlart',tr:'Ödeme yöntemi'},
+    payCash:{ru:'Наличными',en:'Cash',zh:'现金',de:'Bar',tr:'Nakit'},
+    payCard:{ru:'Банковской картой',en:'Bank card',zh:'银行卡',de:'Bankkarte',tr:'Banka kartı'},
+    paySbp:{ru:'СБП (по QR)',en:'SBP (QR)',zh:'扫码支付',de:'QR (SBP)',tr:'QR (SBP)'},
+    sbpHint:{ru:'Отсканируйте QR в приложении банка',en:'Scan the QR in your bank app',zh:'用银行App扫码',de:'QR in der Bank-App scannen',tr:'QR’u banka uygulamasında okutun'},
+    cashHint:{ru:'Внесите наличные или оплатите у кассира',en:'Insert cash or pay at the counter',zh:'投入现金或到柜台支付',de:'Bar zahlen oder an der Kasse',tr:'Nakit atın veya kasada ödeyin'},
+    cardHint:{ru:'Приложите карту или телефон',en:'Tap your card or phone',zh:'刷卡或手机',de:'Karte oder Handy auflegen',tr:'Kart veya telefon okutun'},
+    useBonusLbl:{ru:'Списать бонусы',en:'Use rewards',zh:'使用积分',de:'Bonus einlösen',tr:'Puan kullan'},
+    on:{ru:'Вкл',en:'On',zh:'开',de:'An',tr:'Açık'},
+    off:{ru:'Выкл',en:'Off',zh:'关',de:'Aus',tr:'Kapalı'},
+    extraLbl:{ru:'Доплата за добавки',en:'Add-ons surcharge',zh:'加料费',de:'Aufpreis für Extras',tr:'İlave ücreti'},
+    showLbl:{ru:'Показать',en:'Show',zh:'显示',de:'Zeigen',tr:'Göster'},
+    hideLbl:{ru:'Скрыть',en:'Hide',zh:'隐藏',de:'Ausblenden',tr:'Gizle'},
+    authForBonus:{ru:'Войдите, чтобы списать бонусы',en:'Sign in to use rewards',zh:'登录以使用积分',de:'Anmelden für Bonus',tr:'Puan için giriş yapın'},
+    login:{ru:'Войти',en:'Sign in',zh:'登录',de:'Anmelden',tr:'Giriş'},
+    available:{ru:'Доступно',en:'Available',zh:'可用',de:'Verfügbar',tr:'Mevcut'},
+    allBtn:{ru:'Все',en:'All',zh:'全部',de:'Alle',tr:'Tümü'},
+    milk:{ru:'Мясо',en:'Meat',zh:'肉',de:'Fleisch',tr:'Et'},
+    sizeL:{ru:'Размер',en:'Size',zh:'规格',de:'Größe',tr:'Boyut'},
+    addons:{ru:'Добавки',en:'Add-ons',zh:'加料',de:'Extras',tr:'İlaveler'},
+    back:{ru:'Назад',en:'Back',zh:'返回',de:'Zurück',tr:'Geri'},
+    clear:{ru:'Очистить',en:'Clear',zh:'清空',de:'Leeren',tr:'Temizle'},
+    payInstruction:{ru:'Приложите карту или телефон',en:'Tap your card or phone',zh:'请刷卡或手机支付',de:'Karte oder Handy auflegen',tr:'Kart veya telefonu okutun'},
+    paying:{ru:'Ожидание оплаты…',en:'Waiting for payment…',zh:'等待支付…',de:'Warte auf Zahlung…',tr:'Ödeme bekleniyor…'},
+    paid:{ru:'Оплачено!',en:'Paid!',zh:'支付成功！',de:'Bezahlt!',tr:'Ödendi!'},
+    orderReady:{ru:'Ожидайте ваш номер на табло',en:'Watch the board for your number',zh:'请留意取餐屏',de:'Bitte Anzeigetafel beachten',tr:'Numaranızı ekrandan izleyin'},
+    yourNumber:{ru:'Ваш номер заказа',en:'Your order number',zh:'您的订单号',de:'Ihre Bestellnummer',tr:'Sipariş numaranız'},
+    trackOrder:{ru:'Отсканируйте, чтобы отслеживать статус заказа',en:'Scan to track your order status',zh:'扫码追踪订单状态',de:'Scannen, um den Status zu verfolgen',tr:'Sipariş durumunu izlemek için okutun'},
+    newOrder:{ru:'Новый заказ',en:'New order',zh:'新订单',de:'Neue Bestellung',tr:'Yeni sipariş'},
+    stillHere:{ru:'Вы ещё с нами?',en:'Are you still there?',zh:'您还在吗？',de:'Sind Sie noch da?',tr:'Hâlâ orada mısınız?'},
+    yesContinue:{ru:'Да, продолжить',en:'Yes, continue',zh:'是，继续',de:'Ja, weiter',tr:'Evet, devam'},
+    resetIn:{ru:'Сброс через',en:'Reset in',zh:'重置倒计时',de:'Reset in',tr:'Sıfırlama'},
+    sec:{ru:'сек',en:'s',zh:'秒',de:'Sek',tr:'sn'},
+    lowerScreen:{ru:'Опустить',en:'Lower',zh:'降低',de:'Senken',tr:'İndir'},
+    raiseScreen:{ru:'Поднять экран',en:'Raise screen',zh:'恢复界面',de:'Bildschirm heben',tr:'Ekranı yükselt'},
+    loweredBanner:{ru:'удобный режим',en:'reach mode',zh:'便捷模式',de:'Reichweite',tr:'erişim modu'},
+    help:{ru:'Помощь',en:'Help',zh:'帮助',de:'Hilfe',tr:'Yardım'},
+    disabledMode:{ru:'Маломобильным гостям',en:'Accessibility mode',zh:'无障碍模式',de:'Barrierefreier Modus',tr:'Engelli modu'},
+    total:{ru:'Итого',en:'Total',zh:'合计',de:'Summe',tr:'Toplam'},
+    yourCombo:{ru:'Ваш комбо',en:'Your combo',zh:'您的套餐',de:'Ihr Combo',tr:'Combonuz'},
+    emptyCart:{ru:'Корзина пуста — выберите блюдо',en:'Cart is empty — pick something',zh:'购物车为空',de:'Warenkorb leer',tr:'Sepet boş'},
+    staffCalled:{ru:'Сотрудник скоро подойдёт',en:'Staff is on the way',zh:'员工马上来',de:'Mitarbeiter kommt',tr:'Görevli geliyor'},
+    added:{ru:'Добавлено в корзину',en:'Added to cart',zh:'已加入',de:'Hinzugefügt',tr:'Eklendi'},
+    kcal:{ru:'ккал',en:'kcal',zh:'卡',de:'kcal',tr:'kcal'},
+    hit:{ru:'ХИТ',en:'HIT',zh:'热销',de:'TOP',tr:'POPÜLER'},
+    newb:{ru:'НОВОЕ',en:'NEW',zh:'新品',de:'NEU',tr:'YENİ'},
+  };
+
+  // ===== HELPERS =====
+  t(k){ const e=this.I18N[k]; return e?(e[this.state.lang]||e.en):k; }
+  nm(o){ return o[this.state.lang]||o.en||o.ru; }
+  money(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00A0')+'\u00A0₽'; }
+  bump(){ this.lastAct=Date.now(); }
+  kcalFor(cat){ const m={shawarma:{k:560,p:30,f:28,c:46},signature:{k:680,p:38,f:36,c:50},doner:{k:590,p:32,f:30,c:48},rolls:{k:420,p:22,f:18,c:40},hot:{k:340,p:18,f:20,c:22},salad:{k:210,p:9,f:14,c:12},snack:{k:330,p:6,f:18,c:36},sauce:{k:90,p:1,f:9,c:3},cold:{k:120,p:0,f:0,c:30},hotdrink:{k:110,p:4,f:4,c:14},breakfast:{k:380,p:16,f:18,c:34}}; return m[cat]||{k:0,p:0,f:0,c:0}; }
+  effectiveVideo(){ return this.DEFAULT_VIDEO; }
+  save(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
+
+  themeVars(){
+    if(this.state.theme==='light') return '--bg:#f3efe9;--bg2:#fff;--surface:#ffffff;--card:#ffffff;--fg:#1c1712;--muted:#8a8174;--muted2:#b7afa3;--line:rgba(0,0,0,.09);--accent:#E85D1F;--accent2:#FF8A4C;--accentSoft:rgba(232,93,31,.09);--accentLine:rgba(232,93,31,.28)';
+    return '--bg:#0d0d0d;--bg2:#161018;--surface:#161616;--card:#1c1c1c;--fg:#ffffff;--muted:#8a8a8a;--muted2:#5a5a5a;--line:rgba(255,255,255,.08);--accent:#FF6B2C;--accent2:#FF8F5C;--accentSoft:rgba(255,107,44,.10);--accentLine:rgba(255,107,44,.30)';
+  }
+
+  // ===== LIFECYCLE =====
+  componentDidMount(){
+    this._act=()=>this.bump();
+    document.addEventListener('pointerdown',this._act,true);
+    this._tick=setInterval(()=>{
+      const s=this.state;
+      if(s.idle){
+        const n=s.idleCount-1;
+        if(n<=0){ this.newOrder(); } else { this.setState({idleCount:n}); }
+        return;
+      }
+      if(s.screen==='welcome'||s.screen==='confirm') return;
+      if(Date.now()-this.lastAct>30000){ this.setState({idle:true,idleCount:10}); }
+    },1000);
+  }
+  componentWillUnmount(){ clearInterval(this._tick); document.removeEventListener('pointerdown',this._act,true); clearTimeout(this._pt1); clearTimeout(this._pt2); }
+
+  // ===== ACTIONS =====
+  go(screen){ this.bump(); this.setState({screen}); }
+  chooseLang(l){ this.bump(); this.save('ksoLang',l); this.setState({lang:l,screen:'type',catId:'shawarma'}); }
+  setOtype(t){ this.bump(); this.setState({_otype:t}); }
+  cycleLang(){ const o=['ru','en','zh','de','tr']; const i=o.indexOf(this.state.lang); const l=o[(i+1)%o.length]; this.save('ksoLang',l); this.setState({lang:l}); }
+  setLang(l){ this.bump(); this.save('ksoLang',l); this.setState({lang:l,showLangPick:false}); }
+  langItemStyle(code){ const on=this.state.lang===code; return (on?'border:2px solid var(--accent);background:var(--accentSoft);color:var(--accent);font-weight:700;':'border:2px solid transparent;color:var(--fg);font-weight:600;')+'display:flex;align-items:center;gap:20px;padding:20px 26px;border-radius:18px;cursor:pointer;font-size:32px'; }
+  toggleTheme(){ const th=this.state.theme==='dark'?'light':'dark'; this.save('ksoTheme',th); this.setState({theme:th}); }
+  toggleLower(){ const lo=!this.state.lowered; this.save('ksoLowered',lo?'1':'0'); this.setState({lowered:lo}); }
+  toggleFab(){ this.bump(); this.setState({fabOpen:!this.state.fabOpen}); }
+  toggleCartUpsell(){ this.bump(); this.setState({cartUpsellHidden:!this.state.cartUpsellHidden}); }
+  setCat(id){ this.bump(); this.setState({catId:id}); }
+  callStaff(){ this.bump(); this.showToast(this.t('staffCalled')); }
+  showToast(m){ this.setState({toast:m}); clearTimeout(this._tt); this._tt=setTimeout(()=>this.setState({toast:''}),2400); }
+  forceIdle(){ this.setState({idle:true,idleCount:10}); }
+  keepGoing(){ this.bump(); this.setState({idle:false}); }
+  fmtPhone(p){ const d=(p||'').padEnd(10,'•'); return '+7 ('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6,8)+'-'+d.slice(8,10); }
+  openAuth(){ this.bump(); this.setState({auth:{open:true,step:'phone',phone:'',code:''}}); }
+  closeAuth(){ this.setState({auth:{open:false,step:'phone',phone:'',code:''}}); }
+  authDigit(d){ this.bump(); const a={...this.state.auth}; let extra={}; if(a.step==='phone'){ if(a.phone.length<10) a.phone+=d; } else if(a.step==='otp'){ if(a.code.length<4){ a.code+=d; if(a.code.length===4){ a.step='done'; extra={loggedIn:true,bonus:350}; } } } this.setState({auth:a,...extra}); }
+  authBack(){ this.bump(); const a={...this.state.auth}; if(a.step==='phone') a.phone=a.phone.slice(0,-1); else if(a.step==='otp') a.code=a.code.slice(0,-1); this.setState({auth:a}); }
+  authSend(){ this.bump(); const a={...this.state.auth}; if(a.phone.length>=10){ a.step='otp'; a.code=''; this.setState({auth:a}); } }
+
+  cartCount(){ return this.state.cart.reduce((a,b)=>a+b.qty,0); }
+  cartTotal(){ return this.state.cart.reduce((a,b)=>a+b.price*b.qty,0); }
+
+  addLine(line){
+    const cart=this.state.cart.slice();
+    const ex=cart.find(c=>c.key===line.key);
+    if(ex) ex.qty+=line.qty; else cart.push(line);
+    this.setState({cart});
+  }
+  quickAdd(p){
+    this.bump();
+    this.addLine({key:'q_'+p.id+'_'+Date.now(), pid:p.id, name:this.nm(p), sub:'', price:p.price, qty:1, icon:p.icon});
+    this.openUpsell();
+  }
+  openProduct(p){
+    this.bump();
+    this.setState({product:{p, cat:this.state.catId, size:'M', milk:null, addons:{}, qty:1}, screen:'product'});
+  }
+  setSize(s){ this.setState({product:{...this.state.product,size:s}}); }
+  setMilk(m){ this.setState({product:{...this.state.product,milk:m}}); }
+  toggleAddon(a){ const ad={...this.state.product.addons}; ad[a]=!ad[a]; this.setState({product:{...this.state.product,addons:ad}}); }
+  pdQty(d){ const q=Math.max(1,this.state.product.qty+d); this.setState({product:{...this.state.product,qty:q}}); }
+  pdUnit(){
+    const pr=this.state.product; const p=pr.p;
+    let v=p.price+(pr.size==='L'?60:0);
+    const m=this.MILK.find(x=>x.id===pr.milk); if(m) v+=m.price;
+    this.ADDONS.forEach(a=>{ if(pr.addons[a.id]) v+=a.price; });
+    return v;
+  }
+  addProduct(){
+    this.bump();
+    const pr=this.state.product, p=pr.p;
+    const subs=[]; if(pr.size==='L') subs.push('L');
+    const m=this.MILK.find(x=>x.id===pr.milk); if(m&&m.price) subs.push(this.nm(m).toLowerCase());
+    this.ADDONS.forEach(a=>{ if(pr.addons[a.id]) subs.push('+'+this.nm(a).toLowerCase()); });
+    this.addLine({key:'p_'+p.id+'_'+pr.size+'_'+pr.milk+'_'+Object.keys(pr.addons).filter(k=>pr.addons[k]).join(',')+'_'+Date.now(), pid:p.id, name:this.nm(p)+(pr.size==='L'?' L':''), sub:subs.join(', '), price:this.pdUnit(), qty:pr.qty, icon:p.icon, edit:{pid:p.id,cat:pr.cat,size:pr.size,milk:pr.milk,addons:{...pr.addons},qty:pr.qty}});
+    const back=this.state.returnToCart;
+    this.setState({screen:back?'cart':'menu', returnToCart:false});
+    if(!back) this.openUpsell();
+  }
+  addCross(u){ this.bump(); this.addLine({key:'q_'+u.id+'_'+Date.now(), pid:u.id, name:this.nm(u), sub:'', price:u.price, qty:1, icon:u.icon}); this.showToast(this.t('added')); }
+
+  comboSet(group,id){ this.bump(); this.setState({combo:{...this.state.combo,[group]:id}}); }
+  comboPrice(){ let v=(this.props.comboPrice!=null&&this.props.comboPrice!==''?Number(this.props.comboPrice):450); const c=this.state.combo; ['main','side','drink','sauce'].forEach(g=>{ const o=this.COMBO[g].find(x=>x.id===c[g]); if(o) v+=o.price; }); return v; }
+  comboReady(){ const c=this.state.combo; return c.main&&c.side&&c.drink&&c.sauce; }
+  addCombo(){ if(!this.comboReady()) return; this.bump();
+    const c=this.state.combo; const ic=g=>{const o=this.COMBO[g].find(x=>x.id===c[g]);return o?o.icon:'';};
+    const sub=['main','side','drink','sauce'].map(g=>{const o=this.COMBO[g].find(x=>x.id===c[g]);return o?this.nm(o):'';}).join(' + ');
+    this.addLine({key:'combo_'+Date.now(), pid:'combo', name:'Комбо 🎁', sub, price:this.comboPrice(), qty:1, icon:ic('main'), comboData:{...c}});
+    this.setState({screen:this.state.returnToCart?'cart':'menu', returnToCart:false});
+  }
+  findProduct(pid){ for(const k in this.PRODUCTS){ const f=this.PRODUCTS[k].find(x=>x.id===pid); if(f) return f; } return null; }
+  editLine(line){ this.bump(); const back=this.state.screen==='cart'; const cart=this.state.cart.filter(c=>c.key!==line.key); if(line.comboData){ this.setState({cart,combo:{...line.comboData},screen:'combo',returnToCart:back}); } else if(line.edit){ const p=this.findProduct(line.edit.pid); if(!p){ this.setState({cart}); return; } this.setState({cart,product:{p,cat:line.edit.cat,size:line.edit.size,milk:line.edit.milk,addons:{...line.edit.addons},qty:line.edit.qty},screen:'product',returnToCart:back}); } }
+
+  goCart(){ this.bump(); this.setState({screen:'cart',showCartRec:false}); }
+  closeCartRec(){ this.bump(); this.setState({showCartRec:false}); }
+  openCartRec(){ this.bump(); this.setState({showCartRec:true}); }
+  toggleCartRec(){ this.bump(); this.setState({showCartRec:!this.state.showCartRec}); }
+  clearCart(){ this.bump(); this.setState({cart:[]}); }
+  cartQty(key,d){ this.bump(); let cart=this.state.cart.slice(); const it=cart.find(c=>c.key===key); if(!it) return; it.qty+=d; if(it.qty<=0) cart=cart.filter(c=>c.key!==key); this.setState({cart}); }
+  removeLine(key){ this.bump(); this.setState({cart:this.state.cart.filter(c=>c.key!==key)}); }
+
+  openUpsell(){ this.setState({showUpsell:true}); }
+  dismissUpsell(){ this.bump(); this.setState({showUpsell:false}); }
+  addUpsell(u){ this.bump(); this.addLine({key:'q_'+u.id+'_'+Date.now(), pid:u.id, name:this.nm(u), sub:'', price:u.price, qty:1, icon:u.icon}); this.setState({showUpsell:false}); this.showToast(this.t('added')); }
+
+  goPay(){ if(!this.state.cart.length) return; this.bump(); clearTimeout(this._pt1); clearTimeout(this._pt2); this.setState({screen:'pay',payStep:'method',payMethod:'',bonusUse:0}); }
+  setBonus(v){ this.bump(); const max=Math.min(this.state.bonus||0,this.cartTotal()); this.setState({bonusUse:Math.max(0,Math.min(Math.round(v),max))}); }
+  choosePay(m){ this.bump(); this.setState({payStep:'process',payMethod:m}); clearTimeout(this._pt1); clearTimeout(this._pt2);
+    this._pt1=setTimeout(()=>{ this.setState({payStep:'success'}); }, 2800);
+    this._pt2=setTimeout(()=>{ this.setState({screen:'confirm',orderNumber:String(Math.floor(100+Math.random()*899))}); }, 4400);
+  }
+  newOrder(){ this.bump(); clearTimeout(this._pt1); clearTimeout(this._pt2); this.setState({screen:'welcome',cart:[],idle:false,product:null,combo:{main:'shawarma',side:'fries',drink:null,sauce:null},catId:'shawarma'}); }
+
+  // ===== VIEW MODEL =====
+  renderVals(){
+    const s=this.state, lang=s.lang;
+    const tr={}; Object.keys(this.I18N).forEach(k=>{ tr[k]=this.t(k); });
+    const accent=s.theme==='light'?'#E85D1F':'#FF6B2C';
+    const otype=s._otype||'here';
+    const segC=(on)=> on
+      ? 'flex:1;display:flex;align-items:center;justify-content:center;gap:14px;padding:26px;border-radius:24px;font-size:34px;font-weight:700;cursor:pointer;white-space:nowrap;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 24px var(--accentLine)'
+      : 'flex:1;display:flex;align-items:center;justify-content:center;gap:14px;padding:26px;border-radius:24px;font-size:34px;font-weight:700;cursor:pointer;white-space:nowrap;background:var(--card);color:var(--muted);border:2px solid var(--line)';
+    const segMini=(on)=> on
+      ? 'display:flex;align-items:center;gap:10px;padding:12px 22px;border-radius:22px;font-size:26px;font-weight:700;cursor:pointer;white-space:nowrap;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff'
+      : 'display:flex;align-items:center;gap:10px;padding:12px 22px;border-radius:22px;font-size:26px;font-weight:700;cursor:pointer;white-space:nowrap;color:var(--muted)';
+
+    // cats
+    const catBase='width:100%;min-height:140px;border-radius:22px;border:2px solid transparent;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--muted);transition:transform .15s';
+    const catSel='width:100%;min-height:140px;border-radius:22px;border:2px solid var(--accent);background:var(--accentSoft);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--fg);box-shadow:0 0 34px var(--accentLine);transform:scale(1.03)';
+    const cats=this.CATS.map(c=>({
+      key:c.id, label:this.nm(c), slotId:'slot-cat-'+c.id,
+      imgStyle: s.catId===c.id ? 'width:158px;height:158px;display:block' : 'width:120px;height:120px;display:block;opacity:.5',
+      labelStyle: s.catId===c.id ? 'font-size:27px;font-weight:700;color:var(--accent);text-align:center;line-height:1.15' : 'font-size:24px;font-weight:500;color:var(--muted);text-align:center;line-height:1.15',
+      onSelect:()=>this.setCat(c.id)
+    }));
+
+    // products (+ combo card injected into food)
+    const cardBase='background:var(--card);border-radius:26px;overflow:hidden;position:relative;cursor:pointer;display:flex;flex-direction:column;border:1px solid var(--line);min-height:480px';
+    const comboCard='border-radius:26px;overflow:hidden;position:relative;cursor:pointer;display:flex;flex-direction:column;min-height:480px;background:linear-gradient(150deg,var(--accent),var(--accent2))';
+    let list=(this.PRODUCTS[s.catId]||[]).slice();
+    const products=[];
+    if(s.catId==='shawarma'){ products.push({key:'combo',isCombo:true,isReal:false,cardStyle:comboCard,onCard:()=>this.go('combo'),onPlus:()=>{}}); }
+    list.forEach(p=>{
+      const bs=p.badge==='new'?'position:absolute;top:18px;left:18px;padding:8px 16px;border-radius:12px;background:#2f9e54;color:#fff;font-size:22px;font-weight:800':'position:absolute;top:18px;left:18px;padding:8px 16px;border-radius:12px;background:var(--accent);color:#fff;font-size:22px;font-weight:800';
+      products.push({key:p.id,isReal:true,isCombo:false,name:this.nm(p),vol:p.vol,icon:p.icon,slotId:'slot-card-'+p.id,
+        priceLabel:this.money(p.price),badge:!!p.badge,badgeStyle:bs,badgeLabel:p.badge==='new'?tr.newb:tr.hit,spicy:['sh_sp','sc_sp','ht_lk'].includes(p.id),
+        cardStyle:cardBase,onCard:()=>this.openProduct(p),onPlus:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.openProduct(p);}});
+    });
+
+    // product detail
+    let pd=null;
+    if(s.product){
+      const pr=s.product, p=pr.p;
+      const kc=this.kcalFor(pr.cat);
+      const szBase='flex:1;padding:24px;border-radius:42px;text-align:center;font-weight:700;font-size:36px;cursor:pointer;color:var(--muted)';
+      const szSel='flex:1;padding:24px;border-radius:42px;text-align:center;font-weight:700;font-size:36px;cursor:pointer;background:var(--fg);color:var(--bg);box-shadow:0 6px 18px rgba(0,0,0,.25)';
+      const swBase='width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:64px;background:var(--card);border:3px solid var(--line);cursor:pointer';
+      const swSel='width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:64px;background:var(--accentSoft);border:4px solid var(--accent);box-shadow:0 0 0 6px var(--accentSoft),0 12px 26px var(--accentLine);cursor:pointer';
+      const nmBase='font-size:24px;font-weight:500;color:var(--fg);margin-top:12px;text-align:center';
+      const nmSel='font-size:24px;font-weight:700;color:var(--accent);margin-top:12px;text-align:center';
+      const locked=!pr.milk;
+      pd={
+        name:this.nm(p), subtitle:p.vol, slotId:'slot-card-'+p.id, icon:p.icon, qty:pr.qty,
+        kcal:kc.k,prot:kc.p,fat:kc.f,carb:kc.c,
+        sizes:[
+          {label:'M',style:pr.size==='M'?szSel:szBase,onClick:()=>this.setSize('M')},
+          {label:'L',style:pr.size==='L'?szSel:szBase,onClick:()=>this.setSize('L')},
+        ],
+        milk:this.MILK.map(m=>({name:this.nm(m),icon:m.icon,priceLabel:m.price?('+'+this.money(m.price)):'',circleStyle:pr.milk===m.id?swSel:swBase,nameStyle:pr.milk===m.id?nmSel:nmBase,onClick:()=>this.setMilk(m.id)})),
+        addons:this.ADDONS.map(a=>({name:this.nm(a),icon:a.icon,priceLabel:'+'+this.money(a.price),circleStyle:pr.addons[a.id]?swSel:swBase,nameStyle:pr.addons[a.id]?nmSel:nmBase,onClick:()=>this.toggleAddon(a.id)})),
+        cross:this.CROSS.filter(c=>c.id!==p.id).slice(0,3).map(u=>({name:this.nm(u),icon:u.icon,priceLabel:this.money(u.price),onAdd:()=>this.addCross(u)})),
+        totalLabel:this.money(this.pdUnit()*pr.qty),
+        locked, comboOffer:['shawarma','signature','doner','rolls'].includes(pr.cat), goCombo:()=>this.go('combo'),
+        ctaLabel: locked ? ('🔒 '+tr.pickPrefix+' '+tr.milk) : (tr.addToCart+' · '+this.money(this.pdUnit()*pr.qty)),
+        ctaStyle: locked
+          ? 'flex:1;height:160px;border-radius:26px;background:var(--card);color:var(--muted2);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:700;border:2px solid var(--line)'
+          : 'flex:1;height:160px;border-radius:26px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:800;box-shadow:0 10px 30px var(--accentLine)',
+        inc:()=>this.pdQty(1), dec:()=>this.pdQty(-1), add:()=>{ if(!locked) this.addProduct(); },
+      };
+    }
+
+    // combo
+    const stepDefs=[['main',tr.buildCombo? '' : ''],];
+    const stepMeta=[
+      {g:'main',title:{ru:'Основное',en:'Main',zh:'主食',de:'Hauptgericht',tr:'Ana yemek'}},
+      {g:'side',title:{ru:'Гарнир',en:'Side',zh:'配菜',de:'Beilage',tr:'Garnitür'}},
+      {g:'drink',title:{ru:'Напиток',en:'Drink',zh:'饮料',de:'Getränk',tr:'İçecek'}},
+      {g:'sauce',title:{ru:'Соус',en:'Sauce',zh:'酱料',de:'Soße',tr:'Sos'}},
+    ];
+    const oBase='flex:0 0 200px;text-align:center;padding:22px 14px;border-radius:20px;border:2px solid var(--line);background:var(--card);cursor:pointer';
+    const oSel='flex:0 0 200px;text-align:center;padding:22px 14px;border-radius:20px;border:3px solid var(--accent);background:var(--accentSoft);cursor:pointer';
+    const comboSteps=stepMeta.map((m,idx)=>{
+      const chosen=s.combo[m.g];
+      const isActive=!chosen;
+      return {
+        num:idx+1,
+        title:this.nm(m.title),
+        hint:isActive?('← '+tr.pickStep):'',
+        boxStyle:isActive?'margin-bottom:22px;padding:24px;border-radius:24px;background:var(--accentSoft);border:1px solid var(--accentLine)':'margin-bottom:22px;padding:24px;border-radius:24px;border:1px solid var(--line)',
+        numStyle:'width:56px;height:56px;border-radius:50%;background:'+(chosen?'#2f9e54':'var(--accent)')+';color:#fff;font-size:30px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0',
+        titleStyle:'font-size:34px;font-weight:700;color:var(--fg)',
+        options:this.COMBO[m.g].map(o=>({name:this.nm(o),icon:o.icon,priceLabel:o.price?('+'+this.money(o.price)):'',style:chosen===o.id?oSel:oBase,onClick:()=>this.comboSet(m.g,o.id)})),
+      };
+    });
+    const comboPreview=stepMeta.map(m=>{ const o=this.COMBO[m.g].find(x=>x.id===s.combo[m.g]); return {icon:o?o.icon:'?', chosen:!!o, boxStyle:(o?'background:var(--card);border:3px solid var(--accent)':'background:transparent;border:3px dashed var(--accentLine);color:var(--muted2)')+';width:96px;height:96px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:46px;flex-shrink:0'}; });
+    const comboReady=this.comboReady();
+    const comboCtaStyle=comboReady
+      ?'height:170px;border-radius:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;box-shadow:0 12px 36px var(--accentLine);cursor:pointer'
+      :'height:170px;border-radius:28px;background:var(--card);color:var(--muted2);display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;border:2px solid var(--line)';
+    const comboCtaLabel=comboReady?(tr.addCombo+' 🎁'):(tr.pickStep+'…');
+    const comboExtra=['main','side','drink','sauce'].reduce((a,g)=>{const o=this.COMBO[g].find(x=>x.id===s.combo[g]);return a+(o?o.price:0);},0);
+
+    // cart
+    const cartItems=s.cart.map(c=>({key:c.key,name:c.name,sub:c.sub,icon:c.icon,qty:c.qty,multi:c.qty>1,priceLabel:this.money(c.price*c.qty),editable:!!(c.edit||c.comboData),onEdit:()=>this.editLine(c),onRemove:()=>this.removeLine(c.key),inc:()=>this.cartQty(c.key,1),dec:()=>this.cartQty(c.key,-1)}));
+    const usedIds=s.cart.map(c=>c.pid);
+    const cartUpsell=this.CROSS.slice(0,4).map(u=>({name:this.nm(u),icon:u.icon,priceLabel:this.money(u.price),onAdd:()=>this.addCross(u)}));
+    const popupUpsell=this.CROSS.filter(u=>!usedIds.includes(u.id)).slice(0,3).map(u=>({name:this.nm(u),icon:u.icon,priceLabel:this.money(u.price),onAdd:()=>this.addUpsell(u)}));
+    // rail inline upsell (single)
+    const railCand=this.CROSS.filter(u=>!usedIds.includes(u.id))[0];
+    const railUpsell=railCand?{name:this.nm(railCand),icon:railCand.icon,priceLabel:this.money(railCand.price)}:null;
+
+    const orderType= s._otype==='togo' ? (lang==='ru'?'С собой 🛍️':tr.toGo+' 🛍️') : (lang==='ru'?'Здесь 🍽️':tr.here+' 🍽️');
+
+    return {
+      rootCss:this.themeVars(),
+      hasVideo:true,
+      videoRef:(el)=>{ if(!el) return; const u=this.effectiveVideo(); if(el.getAttribute('src')!==u){ el.setAttribute('src',u); el.load&&el.load(); } el.loop=true; el.muted=true; const p=el.play&&el.play(); if(p&&p.catch) p.catch(()=>{}); },
+      bannerRef:(el)=>{ if(!el) return; const u=this.BANNER_VIDEO; if(el.getAttribute('src')!==u){ el.setAttribute('src',u); el.load&&el.load(); } el.loop=true; el.muted=true; const p=el.play&&el.play(); if(p&&p.catch) p.catch(()=>{}); },
+      onVideoEnded:(e)=>{ const v=e.currentTarget||e.target; try{ v.currentTime=0; const p=v.play&&v.play(); if(p&&p.catch)p.catch(()=>{}); }catch(_){} },
+      shiftStyle: s.lowered?'transform:scale(.84);transform-origin:bottom center':'',
+      tr, lang, lowered:s.lowered, toast:s.toast,
+      themeIcon: s.theme==='dark'?'☀️':'🌙',
+      langLabel: ({ru:'RU',en:'EN',zh:'中文',de:'DE',tr:'TR'})[lang],
+      isWelcome:s.screen==='welcome', isType:s.screen==='type', isMenu:s.screen==='menu'||s.screen==='product',
+      isProduct:s.screen==='product', isCombo:s.screen==='combo', isCart:s.screen==='cart',
+      isPay:s.screen==='pay', isConfirm:s.screen==='confirm',
+      payMethodStep:s.payStep==='method', payProcessStep:s.payStep==='process', paySuccessStep:s.payStep==='success',
+      isSbp:s.payMethod==='sbp', notSbp:s.payMethod!=='sbp', payIcon:(s.payMethod==='cash'?'💵':'💳'),
+      procHint:(s.payMethod==='cash'?this.t('cashHint'):(s.payMethod==='sbp'?this.t('sbpHint'):this.t('cardHint'))),
+      bonusApplicable:!!s.loggedIn, notLoggedIn:!s.loggedIn,
+      payTotalLabel:this.money(this.cartTotal()-Math.min(s.bonusUse||0,Math.min(s.bonus||0,this.cartTotal()))),
+      bonusUseLabel:this.money(Math.min(s.bonusUse||0,Math.min(s.bonus||0,this.cartTotal()))),
+      maxBonusLabel:this.money(Math.min(s.bonus||0,this.cartTotal())),
+      payOptStyle:'display:flex;align-items:center;gap:24px;height:150px;padding:0 40px;border-radius:26px;background:var(--card);border:2px solid var(--line);font-size:40px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.08)',
+      bonusBtn:'width:96px;height:96px;border-radius:24px;background:var(--card);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:48px;cursor:pointer;color:var(--fg)',
+      payCash:()=>this.choosePay('cash'), payCardH:()=>this.choosePay('card'), paySbpH:()=>this.choosePay('sbp'),
+      bonusAll:()=>this.setBonus(Math.min(s.bonus||0,this.cartTotal())), bonusNone:()=>this.setBonus(0), bonusInc:()=>this.setBonus((s.bonusUse||0)+50), bonusDec:()=>this.setBonus((s.bonusUse||0)-50),
+      idle:s.idle, idleCount:s.idleCount, showUpsell:s.showUpsell,
+      orderNumber:s.orderNumber, orderTypeLabel:orderType,
+      activeCatLabel:this.nm(this.CATS.find(c=>c.id===s.catId)||this.CATS[0]),
+      otypeHereStyleC:segC(otype==='here'), otypeToGoStyleC:segC(otype==='togo'),
+      otypeHereMini:segMini(otype==='here'), otypeToGoMini:segMini(otype==='togo'),
+      setHere:()=>this.setOtype('here'), setToGo:()=>this.setOtype('togo'),
+      cats, products, pd, comboSteps, comboPreview,
+      comboPriceLabel:this.money(this.comboPrice()), comboOldLabel:this.money(this.comboPrice()+160),
+      comboCtaStyle, comboCtaLabel, addCombo:()=>this.addCombo(), comboExtraShow:comboExtra>0, comboExtraLabel:this.money(comboExtra),
+      cartItems, cartUpsell, popupUpsell, railUpsell,
+      cartHasUpsell:cartUpsell.length>0, showCartRec:s.showCartRec&&cartUpsell.length>0, recFabShow:s.screen==='cart'&&cartUpsell.length>0, closeCartRec:()=>this.closeCartRec(), openCartRec:()=>this.openCartRec(), toggleCartRec:()=>this.toggleCartRec(),
+      cartCount:this.cartCount(), cartTotalLabel:this.money(this.cartTotal()),
+      cartEmpty:s.cart.length===0, cartHas:s.cart.length>0,
+      // handlers
+      chooseRu:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.chooseLang('ru');}, chooseEn:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.chooseLang('en');}, chooseZh:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.chooseLang('zh');}, chooseDe:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.chooseLang('de');}, chooseTr:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.chooseLang('tr');}, welcomeTap:()=>this.chooseLang('ru'),
+      pickHere:()=>{this.setState({_otype:'here'});this.go('menu');}, pickToGo:()=>{this.setState({_otype:'togo'});this.go('menu');},
+      backToMenu:()=>this.go('menu'), goCart:()=>this.goCart(), goPay:()=>this.goPay(),
+      clearCart:()=>this.clearCart(), newOrder:()=>this.newOrder(),
+      toggleTheme:()=>this.toggleTheme(), toggleLower:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.toggleLower();}, cycleLang:()=>this.cycleLang(),
+      showLangPick:s.showLangPick, openLangPick:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.setState({showLangPick:!s.showLangPick});}, closeLangPick:()=>this.setState({showLangPick:false}),
+      pickLangRu:()=>this.setLang('ru'), pickLangEn:()=>this.setLang('en'), pickLangZh:()=>this.setLang('zh'), pickLangDe:()=>this.setLang('de'), pickLangTr:()=>this.setLang('tr'),
+      langItemRu:this.langItemStyle('ru'), langItemEn:this.langItemStyle('en'), langItemZh:this.langItemStyle('zh'), langItemDe:this.langItemStyle('de'), langItemTr:this.langItemStyle('tr'),
+      tbTile:'display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer',
+      tbCircle:'width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;background:var(--card);border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,0,0,.08);color:var(--fg)',
+      tbCircleAccent:'width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 18px var(--accentLine)',
+      tbLbl:'font-size:18px;color:var(--muted);font-weight:600',
+      tbHelpWrap:'margin-left:auto;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer',
+      tbHelpCircle:'width:106px;height:106px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:44px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 24px var(--accentLine)',
+      fabOpen:s.fabOpen, toggleFab:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.toggleFab();},
+      fabItem:'display:flex;align-items:center;gap:16px;padding:12px 18px 12px 28px;border-radius:60px;background:var(--surface);border:2px solid var(--line);box-shadow:0 10px 26px rgba(0,0,0,.2);font-size:28px;font-weight:600;color:var(--fg);cursor:pointer;white-space:nowrap',
+      fabIcon:'width:76px;height:76px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0',
+      authOpen:!!(s.auth&&s.auth.open), authPhoneStep:!!(s.auth&&s.auth.step==='phone'), authOtpStep:!!(s.auth&&s.auth.step==='otp'), authDoneStep:!!(s.auth&&s.auth.step==='done'), authInput:!!(s.auth&&(s.auth.step==='phone'||s.auth.step==='otp')),
+      loggedIn:!!s.loggedIn, bonusLabel:this.money(s.bonus||0), loyaltyLabel:(s.loggedIn?this.money(s.bonus||0):this.t('loyalty')),
+      phoneDisplay:this.fmtPhone(s.auth?s.auth.phone:''),
+      authCode:[0,1,2,3].map(i=>({ch:(s.auth&&s.auth.code[i])||'', boxStyle:((s.auth&&s.auth.code[i])?'background:var(--accentSoft);border:3px solid var(--accent)':'background:var(--card);border:3px solid var(--line)')+';width:118px;height:140px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:68px;font-weight:800;color:var(--fg)'})),
+      sendStyle:((s.auth&&s.auth.phone.length>=10)?'height:130px;border-radius:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 10px 30px var(--accentLine)':'height:130px;border-radius:24px;background:var(--card);color:var(--muted2);border:2px solid var(--line)')+';display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;cursor:pointer',
+      keyStyle:'height:116px;border-radius:22px;background:var(--card);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:700;cursor:pointer;color:var(--fg)',
+      openAuth:(e)=>{e&&e.stopPropagation&&e.stopPropagation();this.openAuth();}, closeAuth:()=>this.closeAuth(), authSend:()=>this.authSend(), authBack:()=>this.authBack(),
+      dig0:()=>this.authDigit('0'),dig1:()=>this.authDigit('1'),dig2:()=>this.authDigit('2'),dig3:()=>this.authDigit('3'),dig4:()=>this.authDigit('4'),dig5:()=>this.authDigit('5'),dig6:()=>this.authDigit('6'),dig7:()=>this.authDigit('7'),dig8:()=>this.authDigit('8'),dig9:()=>this.authDigit('9'),
+      callStaff:()=>this.callStaff(), forceIdle:()=>this.forceIdle(), keepGoing:()=>this.keepGoing(),
+      dismissUpsell:()=>this.dismissUpsell(),
+      onRailUpsellAdd:()=>{ if(railCand) this.addCross(railCand); },
+    };
+  }
+}
+</script>
+</body>
+</html>
